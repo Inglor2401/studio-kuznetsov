@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
+import { url } from '../utils/url';
 ---
 
 <Layout
@@ -28,7 +29,7 @@ import { SITE } from '../data/site';
 
   <figure class="hero-image img-hover">
     <img
-      src="/images/studio/portrait-in-situ.avif"
+      src={url('/images/studio/portrait-in-situ.avif')}
       alt="Артём Кузнецов, основатель STUDIO KUZNETSOV, в интерьере одного из реализованных объектов студии. Москва, 2024."
       fetchpriority="high"
       loading="eager"
@@ -41,7 +42,7 @@ import { SITE } from '../data/site';
         <aside class="side">
           <figure class="portrait">
             <img
-              src="/images/studio/portrait.avif"
+              src={url('/images/studio/portrait.avif')}
               alt="Портрет Артёма Кузнецова — архитектора, основателя STUDIO KUZNETSOV"
               loading="lazy"
             />

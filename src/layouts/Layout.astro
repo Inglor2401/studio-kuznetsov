@@ -8,6 +8,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SchemaOrg from '../components/SchemaOrg.astro';
+import { url } from '../utils/url';
 
 interface Props {
   title?: string;
@@ -30,13 +31,17 @@ const {
 const pageTitle = title ? `${title} — STUDIO KUZNETSOV` : SITE.meta.title;
 const pageDescription = description ?? SITE.meta.description;
 
-// Canonical URL — без trailing slash, абсолютный
-const canonical = new URL(Astro.url.pathname, SITE.meta.siteUrl).href.replace(/\/$/, '') || SITE.meta.siteUrl;
+// Canonical URL — абсолютный, БЕЗ дублирования base path.
+// Astro.url.pathname уже включает base; siteUrl тоже включает /studio-kuznetsov.
+// Используем https://inglor2401.github.io как origin + Astro.url.pathname.
+const ORIGIN = 'https://inglor2401.github.io';
+const canonical = (ORIGIN + Astro.url.pathname).replace(/\/$/, '') || SITE.meta.siteUrl;
 
-// OG image — per page (если ogImage передан) или дефолтный
+// OG image — per page или default. Все ogImage prop'ы — root-relative ('/og/...'),
+// нужно prepend BASE_URL для GitHub Pages.
 const ogImageUrl = ogImage
-  ? new URL(ogImage, SITE.meta.siteUrl).href
-  : new URL('/og/default.png', SITE.meta.siteUrl).href;
+  ? ORIGIN + url(ogImage)
+  : ORIGIN + url('/og/default.png');
 ---
 
 <!doctype html>
@@ -70,11 +75,11 @@ const ogImageUrl = ogImage
     {/* Theme + favicon */}
     <meta name="theme-color" content="#FAFAF8" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
 
     {/* Preload critical hero image для page-specific LCP */}
     {preloadImage && (
-      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+      <link rel="preload" as="image" href={url(preloadImage)} fetchpriority="high" />
     )}
 
     {/* Schema.org JSON-LD */}

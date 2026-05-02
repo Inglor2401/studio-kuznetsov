@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
+import { url } from '../utils/url';
 
 const featured = SITE.projects[0];
 ---
@@ -18,8 +19,8 @@ const featured = SITE.projects[0];
         главную или посмотрите наши реализованные объекты.
       </p>
       <div class="actions">
-        <a href="/" class="btn">На&nbsp;главную</a>
-        <a href="/projects" class="btn">Все&nbsp;объекты</a>
+        <a href={url('/')} class="btn">На&nbsp;главную</a>
+        <a href={url('/projects')} class="btn">Все&nbsp;объекты</a>
       </div>
     </div>
   </section>

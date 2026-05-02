@@ -368,7 +368,7 @@ export const SITE = {
   meta: {
     title: 'STUDIO KUZNETSOV — архитектура жилых пространств',
     description: 'Мастерская архитектуры интерьеров. Резиденции, городские квартиры от 200 m², загородные дома. Москва, Патриаршие.',
-    ogImage: '/og.jpg',
-    siteUrl: 'https://studiokuznetsov.com',
+    ogImage: '/og/default.png',
+    siteUrl: 'https://inglor2401.github.io/studio-kuznetsov',
   },
 };

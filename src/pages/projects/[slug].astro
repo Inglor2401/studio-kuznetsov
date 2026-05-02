@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { SITE } from '../../data/site';
 import type { Project } from '../../data/site';
+import { url } from '../../utils/url';
 
 export function getStaticPaths() {
   return SITE.projects.map((p) => ({
@@ -32,9 +33,9 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
     {/* Breadcrumbs */}
     <nav class="breadcrumbs mono" aria-label="Хлебные крошки">
       <div class="container">
-        <a href="/">STUDIO KUZNETSOV</a>
+        <a href={url('/')}>STUDIO KUZNETSOV</a>
         <span aria-hidden="true">·</span>
-        <a href="/projects">Объекты</a>
+        <a href={url('/projects')}>Объекты</a>
         <span aria-hidden="true">·</span>
         <span aria-current="page">{project.number} / {project.title}</span>
       </div>
@@ -45,7 +46,7 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
     <section class="project-hero" data-hero>
       <div class="hero-layer hero-plan" data-plan>
         <img
-          src={project.floorplan}
+          src={url(project.floorplan)}
           alt={`Поэтажный план объекта ${project.title}, ${project.area} m². Архитектурный чертёж в масштабе 1:100.`}
         />
         <div class="container plan-meta">
@@ -54,7 +55,7 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
       </div>
       <div class="hero-layer hero-photo" data-photo>
         <img
-          src={project.cover}
+          src={url(project.cover)}
           alt={`${project.title} — ${project.type.toLowerCase()} ${project.area} m² в районе ${project.district}, ${project.location}. ${project.materials}. ${project.year} год.`}
           fetchpriority="high"
           loading="eager"
@@ -135,7 +136,7 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
         project.photos.map((photo, i) => (
           <figure class="photo img-hover">
             <img
-              src={photo}
+              src={url(photo)}
               alt={`${project.title}: интерьер с материалами ${project.materials.toLowerCase()}. Кадр ${i + 1} из ${project.photos.length}.`}
               loading="lazy"
             />
@@ -161,7 +162,7 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
             <span class="mono caption">Поэтажный план / 1:100</span>
             <div class="svg-wrap">
               <img
-                src={project.floorplan}
+                src={url(project.floorplan)}
                 alt={`Архитектурный поэтажный план объекта ${project.title}, ${project.area} m². Чертёж в масштабе 1:100.`}
                 loading="lazy"
               />
@@ -171,7 +172,7 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
             <span class="mono caption">Продольный разрез / 1:100</span>
             <div class="svg-wrap">
               <img
-                src={project.section}
+                src={url(project.section)}
                 alt={`Архитектурный продольный разрез объекта ${project.title}, ${project.area} m². Чертёж в масштабе 1:100.`}
                 loading="lazy"
               />
@@ -184,11 +185,11 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
     {/* Next/prev */}
     <nav class="next-prev" aria-label="Навигация по проектам">
       <div class="container">
-        <a href={`/projects/${prev.slug}`} class="nav-link">
+        <a href={url(`/projects/${prev.slug}`)} class="nav-link">
           <span class="mono">← Предыдущий</span>
           <span class="title">{prev.number} / {prev.title}</span>
         </a>
-        <a href={`/projects/${next.slug}`} class="nav-link right">
+        <a href={url(`/projects/${next.slug}`)} class="nav-link right">
           <span class="mono">Следующий →</span>
           <span class="title">{next.number} / {next.title}</span>
         </a>

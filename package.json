@@ -8,7 +8,10 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "og:generate": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
@@ -19,6 +22,7 @@
     "satori": "^0.26.0"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "vercel": "^53.1.0"
   }
 }

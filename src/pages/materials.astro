@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
+import { url } from '../utils/url';
 ---
 
 <Layout
@@ -29,7 +30,7 @@ import { SITE } from '../data/site';
             <li>
               <div class="img img-hover">
                 <img
-                  src={m.image}
+                  src={url(m.image)}
                   alt={`${m.name} — материал из ${m.origin}, ${m.source}. Используется в проектах ${m.usedIn.join(', ')}.`}
                   loading="lazy"
                 />

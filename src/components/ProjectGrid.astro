@@ -1,6 +1,7 @@
 ---
 import type { Project } from '../data/site';
 import { SITE } from '../data/site';
+import { url } from '../utils/url';
 
 interface Props {
   projects?: Project[];
@@ -15,10 +16,10 @@ const { projects = SITE.projects, pattern = 'uniform' } = Astro.props;
     {
       projects.map((p) => (
         <li>
-          <a href={`/projects/${p.slug}`} class="card">
+          <a href={url(`/projects/${p.slug}`)} class="card">
             <div class="cover img-hover">
               <img
-                src={p.cover}
+                src={url(p.cover)}
                 alt={`${p.title}, ${p.location}, ${p.area} m². ${p.materials}.`}
                 loading="lazy"
               />
