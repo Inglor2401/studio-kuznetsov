@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
+
+const featured = SITE.projects[0];
+---
+
+<Layout
+  title="Страница не найдена"
+  description="Этой страницы нет на сайте. Вернитесь на главную или посмотрите наши объекты."
+>
+  <section class="notfound">
+    <div class="container--text">
+      <p class="mono code">404 / Not found</p>
+      <h1>Этой страницы нет на сайте.</h1>
+      <p class="lead">
+        Возможно, ссылка была изменена или страница ещё не построена. Вернитесь на
+        главную или посмотрите наши реализованные объекты.
+      </p>
+      <div class="actions">
+        <a href="/" class="btn">На&nbsp;главную</a>
+        <a href="/projects" class="btn">Все&nbsp;объекты</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    padding: 96px 0;
+  }
+  .notfound .code {
+    margin-bottom: 32px;
+  }
+  .notfound h1 {
+    margin-bottom: 32px;
+    max-width: 24ch;
+  }
+  .notfound .lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    max-width: 56ch;
+    margin-bottom: 56px;
+  }
+  .notfound .actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+</style>

@@ -11,7 +11,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.1.9"
+    "@astrojs/sitemap": "^3.7.2",
+    "@fontsource-variable/onest": "^5.2.11",
+    "@fontsource/geist-mono": "^5.2.7",
+    "@resvg/resvg-js": "^2.6.2",
+    "astro": "^6.1.9",
+    "satori": "^0.26.0"
   },
   "devDependencies": {
     "sharp": "^0.34.5"

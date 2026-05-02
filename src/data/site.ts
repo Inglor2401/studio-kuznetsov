@@ -83,12 +83,15 @@ export const SITE = {
     phoneLabel: '+7 495 000 00 00',
   },
 
+  // Materials временно скрыт из nav — пока не сгенерены 10 close-up фото.
+  // Страница доступна по прямому URL /materials, в коде остаётся.
   navigation: [
-    { href: '/projects', label: 'Проекты' },
+    { href: '/projects', label: 'Объекты' },
     { href: '/studio', label: 'Студия' },
-    { href: '/materials', label: 'Материалы' },
-    { href: '/contact', label: 'Контакт' },
+    { href: '/contact', label: 'Связаться' },
   ] as NavItem[],
+
+  studioQuote: '«Хороший проект становится виден через десять лет. Поэтому первая встреча — это разговор о том, как вы будете жить в нём в 2036.»',
 
   antiList: [
     {

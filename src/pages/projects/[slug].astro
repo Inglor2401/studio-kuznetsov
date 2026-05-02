@@ -20,13 +20,49 @@ const next = SITE.projects[(idx + 1) % SITE.projects.length];
 const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.length];
 ---
 
-<Layout title={project.title} description={project.brief}>
+<Layout
+  title={project.title}
+  description={project.brief}
+  pageType="project"
+  project={project}
+  ogImage={`/og/projects/${project.slug}.png`}
+  preloadImage={project.cover}
+>
   <article class="project">
-    {/* Hero photo */}
-    <section class="hero">
-      <div class="cover">
-        <img src={project.cover} alt={project.title} />
+    {/* Breadcrumbs */}
+    <nav class="breadcrumbs mono" aria-label="Хлебные крошки">
+      <div class="container">
+        <a href="/">STUDIO KUZNETSOV</a>
+        <span aria-hidden="true">·</span>
+        <a href="/projects">Объекты</a>
+        <span aria-hidden="true">·</span>
+        <span aria-current="page">{project.number} / {project.title}</span>
       </div>
+    </nav>
+
+    {/* SIGNATURE MOVE — Hero с двумя слоями: floor plan crossfades в cover photo при scroll.
+        От чертежа к реализованному объекту. Метафора архитектурного процесса. */}
+    <section class="project-hero" data-hero>
+      <div class="hero-layer hero-plan" data-plan>
+        <img
+          src={project.floorplan}
+          alt={`Поэтажный план объекта ${project.title}, ${project.area} m². Архитектурный чертёж в масштабе 1:100.`}
+        />
+        <div class="container plan-meta">
+          <p class="mono">{project.number} / Поэтажный план / 1:100</p>
+        </div>
+      </div>
+      <div class="hero-layer hero-photo" data-photo>
+        <img
+          src={project.cover}
+          alt={`${project.title} — ${project.type.toLowerCase()} ${project.area} m² в районе ${project.district}, ${project.location}. ${project.materials}. ${project.year} год.`}
+          fetchpriority="high"
+          loading="eager"
+        />
+      </div>
+    </section>
+
+    <section class="project-head">
       <div class="container head">
         <div class="title-block">
           <span class="mono">{project.number} / {project.type}</span>
@@ -41,6 +77,41 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
         </aside>
       </div>
     </section>
+
+    <script>
+      // Scroll-morph: floor plan fades out, cover photo fades in.
+      // Прогрессивное усиление — без JS видна только cover photo (default opacity для plan = 0 в no-JS state).
+      const heroes = document.querySelectorAll<HTMLElement>('[data-hero]');
+      heroes.forEach((hero) => {
+        const plan = hero.querySelector<HTMLElement>('[data-plan]');
+        const photo = hero.querySelector<HTMLElement>('[data-photo]');
+        if (!plan || !photo) return;
+
+        // Initial state: plan visible, photo invisible
+        plan.style.opacity = '1';
+        photo.style.opacity = '0';
+
+        let ticking = false;
+        const update = () => {
+          const rect = hero.getBoundingClientRect();
+          const heroH = hero.offsetHeight;
+          // progress 0 (hero at top) → 1 (hero scrolled out by 90%)
+          const p = Math.max(0, Math.min(1, -rect.top / (heroH * 0.9)));
+          plan.style.opacity = String(Math.max(0, 1 - p * 1.4));
+          photo.style.opacity = String(Math.min(1, p * 1.4));
+          ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+          }
+        }, { passive: true });
+
+        update();
+      });
+    </script>
 
     {/* Brief + story */}
     <section class="text">
@@ -63,7 +134,11 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
       {
         project.photos.map((photo, i) => (
           <figure class="photo img-hover">
-            <img src={photo} alt={`${project.title} — кадр ${i + 1}`} loading="lazy" />
+            <img
+              src={photo}
+              alt={`${project.title}: интерьер с материалами ${project.materials.toLowerCase()}. Кадр ${i + 1} из ${project.photos.length}.`}
+              loading="lazy"
+            />
             <figcaption class="mono">
               <span>{project.number}.{String(i + 1).padStart(2, '0')}</span>
               <span>{project.title}</span>
@@ -85,13 +160,21 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
           <figure>
             <span class="mono caption">Поэтажный план / 1:100</span>
             <div class="svg-wrap">
-              <img src={project.floorplan} alt={`${project.title} — план`} loading="lazy" />
+              <img
+                src={project.floorplan}
+                alt={`Архитектурный поэтажный план объекта ${project.title}, ${project.area} m². Чертёж в масштабе 1:100.`}
+                loading="lazy"
+              />
             </div>
           </figure>
           <figure>
             <span class="mono caption">Продольный разрез / 1:100</span>
             <div class="svg-wrap">
-              <img src={project.section} alt={`${project.title} — разрез`} loading="lazy" />
+              <img
+                src={project.section}
+                alt={`Архитектурный продольный разрез объекта ${project.title}, ${project.area} m². Чертёж в масштабе 1:100.`}
+                loading="lazy"
+              />
             </div>
           </figure>
         </div>
@@ -115,38 +198,108 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
 </Layout>
 
 <style>
-  .hero .cover {
-    width: 100%;
-    height: 88vh;
-    overflow: hidden;
-    background: var(--color-surface-alt);
+  .breadcrumbs {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
   }
-  .hero .cover img {
+  .breadcrumbs > .container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .breadcrumbs span[aria-current],
+  .breadcrumbs a {
+    color: var(--color-text-muted);
+  }
+  .breadcrumbs span[aria-current] {
+    color: var(--color-text);
+  }
+  .breadcrumbs a:hover {
+    color: var(--color-text);
+  }
+
+  /* SIGNATURE — Project hero with floor plan → photo morph */
+  .project-hero {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 64px);
+    min-height: 600px;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+  .hero-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    will-change: opacity;
+    transition: opacity 50ms linear;
+  }
+  .hero-plan {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+  }
+  .hero-plan img {
+    max-width: 78%;
+    max-height: 76%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: contrast(1.05);
+  }
+  .hero-plan .plan-meta {
+    position: absolute;
+    inset: auto 0 32px 0;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-photo {
+    z-index: 1;
+  }
+  .hero-photo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
-  .hero .head {
+
+  /* Project head — title + details, после hero */
+  .project-head {
+    padding: 48px 0 96px;
+  }
+  .project-head .head {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 64px;
     align-items: end;
-    padding-top: 48px;
-    padding-bottom: 96px;
   }
-  .hero .head h1 {
+  .project-head .head h1 {
     margin-top: 16px;
   }
-  .hero .details {
+  .project-head .details {
     text-align: right;
     min-width: 320px;
   }
-  .hero .details p {
+  .project-head .details p {
     margin: 0;
   }
-  .hero .details .materials {
+  .project-head .details .materials {
     margin-top: 12px;
     max-width: 320px;
+  }
+
+  /* Reduced motion — skip the morph */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-plan {
+      opacity: 0 !important;
+    }
+    .hero-photo {
+      opacity: 1 !important;
+    }
   }
 
   .text {
@@ -244,15 +397,22 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
   }
 
   @media (max-width: 720px) {
-    .hero .cover {
-      height: 60vh;
+    .project-hero {
+      height: calc(100vh - 56px);
+      min-height: 480px;
     }
-    .hero .head {
+    .hero-plan img {
+      max-width: 92%;
+      max-height: 70%;
+    }
+    .project-head {
+      padding: 32px 0 64px;
+    }
+    .project-head .head {
       grid-template-columns: 1fr;
       gap: 24px;
-      padding-bottom: 64px;
     }
-    .hero .details {
+    .project-head .details {
       text-align: left;
     }
     .text .grid {

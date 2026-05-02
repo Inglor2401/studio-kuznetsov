@@ -4,19 +4,24 @@ import { SITE } from '../data/site';
 
 interface Props {
   projects?: Project[];
+  pattern?: 'uniform' | 'asymmetric';
 }
 
-const { projects = SITE.projects } = Astro.props;
+const { projects = SITE.projects, pattern = 'uniform' } = Astro.props;
 ---
 
-<section class="project-grid">
+<section class:list={['project-grid', pattern === 'asymmetric' && 'project-grid--asymmetric']}>
   <ul>
     {
       projects.map((p) => (
         <li>
           <a href={`/projects/${p.slug}`} class="card">
             <div class="cover img-hover">
-              <img src={p.cover} alt={p.title} loading="lazy" />
+              <img
+                src={p.cover}
+                alt={`${p.title}, ${p.location}, ${p.area} m². ${p.materials}.`}
+                loading="lazy"
+              />
             </div>
             <div class="meta">
               <span class="mono num">{p.number}</span>
@@ -36,6 +41,18 @@ const { projects = SITE.projects } = Astro.props;
     grid-template-columns: repeat(2, 1fr);
     gap: 96px 32px;
     list-style: none;
+  }
+
+  /* Asymmetric pattern — first card full-width, остальные 2-col.
+     Breathes pace, breaks template-feel of uniform grid. */
+  .project-grid--asymmetric ul > li:first-child {
+    grid-column: 1 / -1;
+  }
+  .project-grid--asymmetric ul > li:first-child .cover {
+    aspect-ratio: 21 / 9;
+  }
+  .project-grid--asymmetric ul > li:first-child h3 {
+    font-size: clamp(20px, 2vw, 28px);
   }
 
   .card {
@@ -64,6 +81,26 @@ const { projects = SITE.projects } = Astro.props;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: -0.01em;
+    position: relative;
+    display: inline-block;
+  }
+
+  /* Underline reveal on hover — left to right за 600ms */
+  .meta h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 1px;
+    background: var(--color-text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 600ms var(--ease-out);
+  }
+
+  .card:hover .meta h3::after {
+    transform: scaleX(1);
   }
 
   .num {

@@ -1,0 +1,131 @@
+---
+import { SITE } from '../data/site';
+import type { Project } from '../data/site';
+
+interface Props {
+  pageType?: 'home' | 'studio' | 'project' | 'projects' | 'materials' | 'contact';
+  project?: Project;
+  url: string;
+}
+
+const { pageType = 'home', project, url } = Astro.props;
+
+// Organization (LocalBusiness) — постоянный, на каждой странице
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': `${SITE.meta.siteUrl}#organization`,
+  name: SITE.studio.name,
+  description: SITE.studio.bio.replace(/\n+/g, ' '),
+  url: SITE.meta.siteUrl,
+  email: SITE.contact.email,
+  telephone: SITE.contact.phone,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.studio.location,
+    addressCountry: 'RU',
+    streetAddress: SITE.studio.address,
+  },
+  founder: {
+    '@type': 'Person',
+    '@id': `${SITE.meta.siteUrl}#founder`,
+    name: SITE.studio.principal,
+    jobTitle: SITE.studio.role,
+  },
+  foundingDate: String(SITE.studio.foundedYear),
+  priceRange: '8000000+ RUB',
+  knowsAbout: [
+    'Архитектура интерьера',
+    'Жилая архитектура',
+    'Резиденции',
+    'Городские квартиры',
+    'Загородные дома',
+    'Авторский надзор',
+  ],
+  areaServed: { '@type': 'Country', name: 'Russia' },
+  sameAs: [SITE.contact.telegram],
+};
+
+// Person (Артём) — отдельная сущность, ссылается из Organization
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE.meta.siteUrl}#founder`,
+  name: SITE.studio.principal,
+  jobTitle: SITE.studio.role,
+  worksFor: { '@id': `${SITE.meta.siteUrl}#organization` },
+  image: `${SITE.meta.siteUrl}/images/studio/portrait.avif`,
+  knowsAbout: organization.knowsAbout,
+  nationality: 'Russian',
+};
+
+// CreativeWork для проектной страницы
+const creativeWork = project
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'CreativeWork',
+      name: project.title,
+      description: project.brief,
+      creator: { '@id': `${SITE.meta.siteUrl}#organization` },
+      author: { '@id': `${SITE.meta.siteUrl}#founder` },
+      dateCreated: String(project.year),
+      locationCreated: {
+        '@type': 'Place',
+        name: `${project.location}, ${project.district}`,
+      },
+      genre: project.type,
+      material: project.materials,
+      image: `${SITE.meta.siteUrl}${project.cover}`,
+      url: url,
+    }
+  : null;
+
+// ItemList для /projects index
+const projectsList =
+  pageType === 'projects'
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Объекты STUDIO KUZNETSOV',
+        description: 'Восемь объектов жилой архитектуры, сданных в 2022–2024',
+        url,
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: SITE.projects.length,
+          itemListElement: SITE.projects.map((p, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            item: {
+              '@type': 'CreativeWork',
+              name: p.title,
+              url: `${SITE.meta.siteUrl}/projects/${p.slug}`,
+              image: `${SITE.meta.siteUrl}${p.cover}`,
+            },
+          })),
+        },
+      }
+    : null;
+
+// WebPage — общий контейнер для всех страниц
+const webPage = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url,
+  isPartOf: {
+    '@type': 'WebSite',
+    url: SITE.meta.siteUrl,
+    name: SITE.studio.name,
+    publisher: { '@id': `${SITE.meta.siteUrl}#organization` },
+    inLanguage: 'ru-RU',
+  },
+  about: { '@id': `${SITE.meta.siteUrl}#organization` },
+};
+
+const schemas = [organization, person, webPage];
+if (creativeWork) schemas.push(creativeWork);
+if (projectsList) schemas.push(projectsList);
+---
+
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

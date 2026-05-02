@@ -5,7 +5,9 @@ import { SITE } from '../data/site';
 
 <Layout
   title="Материалы"
-  description="Палитра материалов и поставщиков, с которыми работает STUDIO KUZNETSOV."
+  description="Палитра материалов и поставщиков, с которыми работает STUDIO KUZNETSOV. Дуб из Бургундии, мрамор Каррара, известковая штукатурка из Венеции."
+  pageType="materials"
+  ogImage="/og/default.png"
 >
   <section class="hero">
     <div class="container">
@@ -26,7 +28,11 @@ import { SITE } from '../data/site';
           SITE.materials.map((m) => (
             <li>
               <div class="img img-hover">
-                <img src={m.image} alt={m.name} loading="lazy" />
+                <img
+                  src={m.image}
+                  alt={`${m.name} — материал из ${m.origin}, ${m.source}. Используется в проектах ${m.usedIn.join(', ')}.`}
+                  loading="lazy"
+                />
               </div>
               <div class="meta">
                 <p class="mono origin">{m.origin}</p>

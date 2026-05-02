@@ -8,11 +8,20 @@ const featured = SITE.projects[0];
 const restProjects = SITE.projects.slice(1);
 ---
 
-<Layout>
+<Layout
+  pageType="home"
+  ogImage="/og/default.png"
+  preloadImage={featured.cover}
+>
   {/* Hero — featured project full-bleed with editorial overlay */}
   <section class="hero">
-    <a href={`/projects/${featured.slug}`} class="hero-link">
-      <img src={featured.cover} alt={featured.title} />
+    <a href={`/projects/${featured.slug}`} class="hero-link" aria-label={`Открыть проект: ${featured.title}`}>
+      <img
+        src={featured.cover}
+        alt={`${featured.title} — резиденция ${featured.area} m² в районе ${featured.district}, Москва. Материалы: ${featured.materials}.`}
+        fetchpriority="high"
+        loading="eager"
+      />
       <div class="hero-overlay">
         <div class="container">
           <p class="hero-tagline">{SITE.studio.bioShort}</p>
@@ -31,11 +40,22 @@ const restProjects = SITE.projects.slice(1);
   <section class="projects-section">
     <div class="container">
       <h2 class="section-h2">Избранные работы 2022–2024</h2>
-      <ProjectGrid projects={restProjects} />
+      <ProjectGrid projects={restProjects} pattern="asymmetric" />
       <div class="all-link">
-        <a href="/projects" class="btn">Все проекты →</a>
+        <a href="/projects" class="btn">Все объекты →</a>
       </div>
     </div>
+  </section>
+
+  {/* Breathing pattern — full-bleed photo break (одна фотография как «вдох» между секциями) */}
+  <section class="photo-break">
+    <a href={`/projects/${SITE.projects[2].slug}`} class="img-hover" aria-label={`Открыть проект: ${SITE.projects[2].title}`}>
+      <img
+        src={SITE.projects[2].cover}
+        alt={`${SITE.projects[2].title} — двусветная гостиная с центральным камином и видом на берёзовый лес.`}
+        loading="lazy"
+      />
+    </a>
   </section>
 
   {/* Studio teaser */}
@@ -180,6 +200,25 @@ const restProjects = SITE.projects.slice(1);
     margin-top: 96px;
     display: flex;
     justify-content: center;
+  }
+
+  /* Photo-break — breathing pause между плотными текстовыми секциями */
+  .photo-break {
+    width: 100%;
+    height: 75vh;
+    overflow: hidden;
+    background: var(--color-surface-alt);
+  }
+  .photo-break a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .photo-break img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .studio-teaser {

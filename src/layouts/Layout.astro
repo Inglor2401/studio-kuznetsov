@@ -1,17 +1,42 @@
 ---
 import { SITE } from '../data/site';
+import type { Project } from '../data/site';
+import '@fontsource-variable/onest';
+import '@fontsource/geist-mono/400.css';
+import '@fontsource/geist-mono/500.css';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
 
 interface Props {
   title?: string;
   description?: string;
+  pageType?: 'home' | 'studio' | 'project' | 'projects' | 'materials' | 'contact';
+  project?: Project;
+  ogImage?: string;
+  preloadImage?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  pageType = 'home',
+  project,
+  ogImage,
+  preloadImage,
+} = Astro.props;
+
 const pageTitle = title ? `${title} — STUDIO KUZNETSOV` : SITE.meta.title;
 const pageDescription = description ?? SITE.meta.description;
+
+// Canonical URL — без trailing slash, абсолютный
+const canonical = new URL(Astro.url.pathname, SITE.meta.siteUrl).href.replace(/\/$/, '') || SITE.meta.siteUrl;
+
+// OG image — per page (если ogImage передан) или дефолтный
+const ogImageUrl = ogImage
+  ? new URL(ogImage, SITE.meta.siteUrl).href
+  : new URL('/og/default.png', SITE.meta.siteUrl).href;
 ---
 
 <!doctype html>
@@ -21,28 +46,51 @@ const pageDescription = description ?? SITE.meta.description;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
+
+    {/* Canonical */}
+    <link rel="canonical" href={canonical} />
+
+    {/* OG */}
+    <meta property="og:type" content={pageType === 'project' ? 'article' : 'website'} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={SITE.meta.siteUrl} />
-    <meta name="theme-color" content="#FFFFFF" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.studio.name} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    {/* Twitter */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {/* Theme + favicon */}
+    <meta name="theme-color" content="#FAFAF8" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <link rel="preconnect" href="https://api.fontshare.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
-    />
+    {/* Preload critical hero image для page-specific LCP */}
+    {preloadImage && (
+      <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
+
+    {/* Schema.org JSON-LD */}
+    <SchemaOrg pageType={pageType} project={project} url={canonical} />
+
+    {/* Plausible analytics — defer load, no cookies */}
+    <script
+      defer
+      data-domain="studiokuznetsov.com"
+      src="https://plausible.io/js/script.js"
+    ></script>
   </head>
   <body>
+    <a href="#main" class="skip-link">К&nbsp;основному содержанию</a>
     <Header />
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />

@@ -3,7 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
 ---
 
-<Layout title="Контакт" description="Брифинг в шоуруме на Патриарших, по записи.">
+<Layout
+  title="Связаться"
+  description="Брифинг в шоуруме на Патриарших, по записи. Email, Telegram, телефон или форма брифа."
+  pageType="contact"
+  ogImage="/og/contact.png"
+>
   <section class="hero">
     <div class="container">
       <span class="mono">— Контакт</span>
@@ -39,7 +44,11 @@ import { SITE } from '../data/site';
   <section class="brief">
     <div class="container">
       <h2>Расскажите о проекте</h2>
-      <form class="brief-form" name="brief" method="POST" action="#">
+      <p class="brief-intro">
+        Пять полей. Этого достаточно, чтобы решить — продолжаем разговор или нет.
+        Метраж, бюджет и сроки уточним при первой встрече.
+      </p>
+      <form class="brief-form" name="brief" method="POST" data-form>
         <div class="row">
           <label>
             <span class="mono">Тип объекта</span>
@@ -53,36 +62,8 @@ import { SITE } from '../data/site';
             </select>
           </label>
           <label>
-            <span class="mono">Метраж</span>
-            <select name="area" required>
-              <option value="">—</option>
-              <option>До 200 m²</option>
-              <option>200–400 m²</option>
-              <option>400–700 m²</option>
-              <option>Больше 700 m²</option>
-            </select>
-          </label>
-        </div>
-        <div class="row">
-          <label>
-            <span class="mono">Бюджет на отделку</span>
-            <select name="budget" required>
-              <option value="">—</option>
-              <option>8–15 млн ₽</option>
-              <option>15–25 млн ₽</option>
-              <option>25–50 млн ₽</option>
-              <option>Больше 50 млн ₽</option>
-            </select>
-          </label>
-          <label>
-            <span class="mono">Желаемые сроки старта</span>
-            <select name="start" required>
-              <option value="">—</option>
-              <option>В ближайший месяц</option>
-              <option>1–3 месяца</option>
-              <option>3–6 месяцев</option>
-              <option>Позже</option>
-            </select>
+            <span class="mono">Локация</span>
+            <input type="text" name="location" placeholder="Москва, Патриаршие" required />
           </label>
         </div>
         <label>
@@ -95,12 +76,33 @@ import { SITE } from '../data/site';
         </label>
         <label>
           <span class="mono">Коротко о запросе</span>
-          <textarea name="message" rows="4" required></textarea>
+          <textarea name="message" rows="4" required placeholder="Семья, сценарий, что важно"></textarea>
         </label>
-        <button type="submit" class="btn">Отправить →</button>
+        <button type="submit" class="btn">Отправить запрос →</button>
       </form>
+
+      <div class="brief-success" data-success hidden>
+        <p class="mono">— Принято</p>
+        <h3>Спасибо. Артём ответит лично в течение 24 часов.</h3>
+        <p>Если запрос срочный — пишите в Telegram <a href={SITE.contact.telegram} class="link">{SITE.contact.telegramLabel}</a>.</p>
+      </div>
     </div>
   </section>
+
+  <script>
+    const form = document.querySelector('[data-form]') as HTMLFormElement | null;
+    const success = document.querySelector('[data-success]') as HTMLDivElement | null;
+    if (form && success) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // TODO production: POST в Resend / Formspree / Astro form action endpoint
+        // Пока — показываем success state без реальной отправки
+        form.hidden = true;
+        success.hidden = false;
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  </script>
 </Layout>
 
 <style>
@@ -149,7 +151,32 @@ import { SITE } from '../data/site';
     padding: 128px 0;
   }
   .brief > .container > h2 {
+    margin-bottom: 24px;
+  }
+  .brief-intro {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    max-width: 56ch;
     margin-bottom: 64px;
+  }
+  .brief-success {
+    max-width: 640px;
+  }
+  .brief-success .mono {
+    margin-bottom: 24px;
+  }
+  .brief-success h3 {
+    font-size: clamp(24px, 2.6vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .brief-success p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-text-muted);
   }
   .brief-form {
     display: grid;

@@ -3,7 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
 ---
 
-<Layout title="Студия" description={SITE.studio.bioShort}>
+<Layout
+  title="Студия"
+  description={SITE.studio.bioShort}
+  pageType="studio"
+  ogImage="/og/studio.png"
+  preloadImage="/images/studio/portrait-in-situ.avif"
+>
   <section class="hero">
     <div class="container">
       <span class="mono">— Студия</span>
@@ -11,8 +17,22 @@ import { SITE } from '../data/site';
     </div>
   </section>
 
+  <section class="quote">
+    <div class="container">
+      <blockquote>
+        <p>{SITE.studioQuote}</p>
+        <cite>Артём Кузнецов</cite>
+      </blockquote>
+    </div>
+  </section>
+
   <figure class="hero-image img-hover">
-    <img src="/images/studio/portrait-in-situ.avif" alt="Артём Кузнецов в одном из проектов студии" />
+    <img
+      src="/images/studio/portrait-in-situ.avif"
+      alt="Артём Кузнецов, основатель STUDIO KUZNETSOV, в интерьере одного из реализованных объектов студии. Москва, 2024."
+      fetchpriority="high"
+      loading="eager"
+    />
   </figure>
 
   <section class="bio">
@@ -20,7 +40,11 @@ import { SITE } from '../data/site';
       <div class="grid">
         <aside class="side">
           <figure class="portrait">
-            <img src="/images/studio/portrait.avif" alt="Артём Кузнецов" />
+            <img
+              src="/images/studio/portrait.avif"
+              alt="Портрет Артёма Кузнецова — архитектора, основателя STUDIO KUZNETSOV"
+              loading="lazy"
+            />
           </figure>
           <div class="mono">
             <p>{SITE.studio.principal}</p>
@@ -109,6 +133,33 @@ import { SITE } from '../data/site';
     max-width: 1200px;
   }
 
+  /* Pull quote — личный голос Артёма перед bio */
+  .quote {
+    padding: 96px 0 128px;
+    border-top: 1px solid var(--color-border);
+  }
+  .quote blockquote {
+    max-width: 880px;
+  }
+  .quote blockquote p {
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--color-text);
+    text-wrap: balance;
+  }
+  .quote blockquote cite {
+    display: block;
+    margin-top: 32px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    font-style: normal;
+  }
+
   .hero-image {
     width: 100%;
     height: 70vh;
@@ -158,6 +209,21 @@ import { SITE } from '../data/site';
   }
   .bio .text p:last-child {
     margin-bottom: 0;
+  }
+
+  /* Drop cap — monumental typography moment.
+     Первая буква первого параграфа bio = большая,
+     opens essay-style content в духе печатной книги. */
+  .bio .text p:first-child::first-letter {
+    font-family: var(--font-sans);
+    font-size: clamp(64px, 7vw, 96px);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.85;
+    float: left;
+    padding-right: 16px;
+    padding-top: 8px;
+    color: var(--color-text);
   }
 
   .approach {

@@ -13,7 +13,34 @@ const isActive = (href: string) => {
     <a href="/" class="wordmark" aria-label="STUDIO KUZNETSOV — главная">
       {SITE.studio.name}
     </a>
-    <nav aria-label="Главная навигация">
+
+    <nav class="nav-desktop" aria-label="Главная навигация">
+      <ul>
+        {SITE.navigation.map((item) => (
+          <li>
+            <a href={item.href} class:list={[{ active: isActive(item.href) }]}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button
+      class="nav-toggle"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+      type="button"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+
+  {/* Mobile drawer */}
+  <div class="mobile-drawer" id="mobile-drawer" hidden>
+    <nav aria-label="Мобильная навигация">
       <ul>
         {SITE.navigation.map((item) => (
           <li>
@@ -26,6 +53,40 @@ const isActive = (href: string) => {
     </nav>
   </div>
 </header>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement | null;
+  const drawer = document.getElementById('mobile-drawer');
+  const body = document.body;
+
+  if (toggle && drawer) {
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      const next = !isOpen;
+      toggle.setAttribute('aria-expanded', String(next));
+      toggle.setAttribute('aria-label', next ? 'Закрыть меню' : 'Открыть меню');
+      drawer.hidden = !next;
+      body.classList.toggle('drawer-open', next);
+    });
+
+    // Close on link click
+    drawer.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню');
+        drawer.hidden = true;
+        body.classList.remove('drawer-open');
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        toggle.click();
+      }
+    });
+  }
+</script>
 
 <style>
   .site-header {
@@ -55,37 +116,105 @@ const isActive = (href: string) => {
     opacity: 0.6;
   }
 
-  nav ul {
+  .nav-desktop ul {
     display: flex;
     gap: 32px;
     list-style: none;
   }
 
-  nav a {
+  .nav-desktop a {
     font-size: 14px;
     font-weight: 400;
     color: var(--color-text-muted);
     transition: color 200ms var(--ease-out);
   }
 
-  nav a.active,
-  nav a:hover {
+  .nav-desktop a.active,
+  .nav-desktop a:hover {
     color: var(--color-text);
     opacity: 1;
+  }
+
+  /* Hamburger toggle */
+  .nav-toggle {
+    display: none;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-toggle .bar {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-text);
+    transition: transform 250ms var(--ease-out), opacity 250ms var(--ease-out);
+  }
+  .nav-toggle[aria-expanded='true'] .bar:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded='true'] .bar:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+
+  /* Mobile drawer */
+  .mobile-drawer {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-bg);
+    z-index: 99;
+    padding: 64px var(--gutter);
+    overflow-y: auto;
+  }
+  .mobile-drawer nav ul {
+    display: grid;
+    gap: 24px;
+    list-style: none;
+  }
+  .mobile-drawer nav a {
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    display: block;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .mobile-drawer nav a.active {
+    opacity: 0.5;
+  }
+
+  :global(body.drawer-open) {
+    overflow: hidden;
   }
 
   @media (max-width: 720px) {
     .site-header > .container {
       height: 56px;
     }
-    nav ul {
-      gap: 16px;
-    }
     .wordmark {
       font-size: 12px;
     }
-    nav a {
-      font-size: 12px;
+    .nav-desktop {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+    }
+  }
+
+  @media (min-width: 721px) {
+    .mobile-drawer {
+      display: none !important;
     }
   }
 </style>
