@@ -1,0 +1,237 @@
+/* ============================================================
+   STUDIO KUZNETSOV — global tokens & reset
+   Direction: architectural minimalism (Van Duysen / Pawson).
+   Locked levers: radius=0, без shadows, без gradient, без serif,
+   без cream/beige, motion = fade-in 600ms + scale(1.02) на hover.
+   ============================================================ */
+
+:root {
+  /* color */
+  --color-bg: #FFFFFF;
+  --color-text: #0A0A0A;
+  --color-text-muted: #6B6B6B;
+  --color-border: #E5E5E5;
+  --color-surface-alt: #FAFAFA;
+
+  /* type */
+  --font-sans: 'General Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* layout */
+  --container-max: 1440px;   /* для медиа: project grid, hero photos */
+  --text-max: 1080px;        /* для текстовых секций: Press, Phases, FAQ, Principles */
+  --gutter: 32px;
+
+  /* spacing — 8pt scale */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 128px;
+  --space-9: 192px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* reset */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0; /* hard rule — никаких округлений нигде */
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ============================================================
+   typography
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(48px, 6vw, 96px);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  font-size: clamp(32px, 3.5vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  font-size: clamp(20px, 1.8vw, 24px);
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 200ms var(--ease-out);
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
+/* utility */
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.container--text {
+  max-width: var(--text-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.link {
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* button */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 28px;
+  border: 1px solid var(--color-text);
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.btn:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+  opacity: 1;
+}
+
+/* image hover scale (signature motion accent) */
+
+.img-hover {
+  overflow: hidden;
+  display: block;
+}
+
+.img-hover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 800ms var(--ease-out);
+}
+
+.img-hover:hover img {
+  transform: scale(1.02);
+}
+
+/* reveal animation */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* focus */
+
+*:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* selection */
+
+::selection {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+/* signature 1px divider — между секциями */
+
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  width: 100%;
+  display: block;
+}
+
+/* section-head pattern (used on multiple pages) */
+
+.section-head {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 64px;
+}

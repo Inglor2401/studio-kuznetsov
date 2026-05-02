@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дом, Барвиха — поперечный разрез">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .ghost { stroke: #BBBBBB; stroke-width: 0.5; fill: none; stroke-dasharray: 3 3; }
+    .filled { fill: #0A0A0A; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Sloped ground line (склон, falling from north to south) -->
+  <line x1="40" y1="380" x2="240" y2="380" class="wall"/>
+  <line x1="240" y1="380" x2="540" y2="450" class="wall"/>
+  <line x1="540" y1="450" x2="760" y2="450" class="wall"/>
+  <!-- Ground hatching -->
+  <line x1="60" y1="385" x2="50" y2="395" class="furn"/>
+  <line x1="120" y1="385" x2="110" y2="395" class="furn"/>
+  <line x1="180" y1="385" x2="170" y2="395" class="furn"/>
+  <line x1="280" y1="395" x2="270" y2="405" class="furn"/>
+  <line x1="350" y1="410" x2="340" y2="420" class="furn"/>
+  <line x1="420" y1="425" x2="410" y2="435" class="furn"/>
+  <line x1="500" y1="445" x2="490" y2="455" class="furn"/>
+  <line x1="600" y1="455" x2="590" y2="465" class="furn"/>
+  <line x1="680" y1="455" x2="670" y2="465" class="furn"/>
+
+  <!-- House cross-section: 2 levels stepping with hill -->
+  <!-- Foundation/lower level -->
+  <line x1="240" y1="380" x2="240" y2="180" class="wall"/>
+  <line x1="660" y1="380" x2="660" y2="180" class="wall"/>
+  <!-- Roof — flat -->
+  <line x1="220" y1="180" x2="680" y2="180" class="wall"/>
+  <line x1="220" y1="172" x2="680" y2="172" class="inner"/>
+
+  <!-- Double-height living room (8m ceiling, in middle, no slab) -->
+  <!-- Mezzanine slab on ends only -->
+  <line x1="240" y1="280" x2="380" y2="280" class="wall"/>
+  <line x1="520" y1="280" x2="660" y2="280" class="wall"/>
+  <line x1="240" y1="288" x2="380" y2="288" class="inner"/>
+  <line x1="520" y1="288" x2="660" y2="288" class="inner"/>
+
+  <!-- Mezzanine railings -->
+  <line x1="380" y1="280" x2="380" y2="250" class="furn"/>
+  <line x1="520" y1="280" x2="520" y2="250" class="furn"/>
+  <line x1="240" y1="280" x2="240" y2="250" class="furn"/>
+  <line x1="660" y1="280" x2="660" y2="250" class="furn"/>
+
+  <!-- Internal walls on mezzanine level -->
+  <line x1="320" y1="280" x2="320" y2="180" class="inner"/>
+  <line x1="580" y1="280" x2="580" y2="180" class="inner"/>
+
+  <!-- Conservatory bump-out on south (winter garden) -->
+  <line x1="660" y1="380" x2="720" y2="380" class="wall"/>
+  <line x1="720" y1="380" x2="720" y2="280" class="wall"/>
+  <line x1="720" y1="280" x2="660" y2="280" class="inner"/>
+  <line x1="720" y1="284" x2="660" y2="284" class="inner"/>
+  <!-- Conservatory glass walls -->
+  <line x1="724" y1="380" x2="724" y2="280" class="inner"/>
+
+  <!-- Central fireplace + flue (rises from ground floor through roof) -->
+  <rect x="430" y="180" width="40" height="200" class="filled"/>
+  <line x1="430" y1="180" x2="430" y2="150" class="furn"/>
+  <line x1="470" y1="180" x2="470" y2="150" class="furn"/>
+
+  <!-- Furniture on lower level -->
+  <rect x="280" y="350" width="80" height="30" class="furn"/>
+  <rect x="540" y="350" width="80" height="30" class="furn"/>
+  <ellipse cx="690" cy="365" rx="20" ry="10" class="furn"/>
+
+  <!-- Bedroom on mezzanine -->
+  <rect x="260" y="240" width="50" height="40" class="furn"/>
+  <rect x="600" y="240" width="50" height="40" class="furn"/>
+
+  <!-- Trees (forest backdrop, ghost) -->
+  <circle cx="780" cy="430" r="20" class="ghost"/>
+  <line x1="780" y1="430" x2="780" y2="450" class="ghost"/>
+  <circle cx="50" cy="350" r="18" class="ghost"/>
+  <line x1="50" y1="350" x2="50" y2="380" class="ghost"/>
+
+  <!-- Person for scale -->
+  <line x1="450" y1="380" x2="450" y2="320" class="furn"/>
+  <circle cx="450" cy="312" r="7" class="furn"/>
+
+  <!-- Level labels -->
+  <text x="50" y="290" class="meta">+3.20 — МЕЗОНИН</text>
+  <text x="50" y="375" class="meta">+0.00 — УР. ПОЛА</text>
+  <text x="50" y="170" class="meta">+8.00 — КРОВЛЯ</text>
+
+  <!-- Room labels -->
+  <text x="450" y="320" class="room" text-anchor="middle">ОБЩАЯ ЗОНА</text>
+  <text x="450" y="335" class="meta" text-anchor="middle">— ДВУСВЕТНАЯ, 8 М —</text>
+  <text x="280" y="240" class="room" text-anchor="middle">ХОЗ. СПАЛЬНЯ</text>
+  <text x="620" y="240" class="room" text-anchor="middle">ДЕТСКАЯ</text>
+  <text x="690" y="335" class="room" text-anchor="middle">ЗИМН. САД</text>
+  <text x="450" y="265" class="meta" text-anchor="middle">КАМИН</text>
+
+  <!-- Slope indication -->
+  <text x="160" y="365" class="meta" text-anchor="middle">↑ СКЛОН — ВЫХОД В ЛЕС</text>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 575)">
+    <line x1="0" y1="0" x2="80" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="32" y1="-3" x2="32" y2="3" class="wall"/>
+    <line x1="80" y1="-3" x2="80" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="32" y="14" class="meta">2</text>
+    <text x="76" y="14" class="meta">5 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 560)">
+    <text x="0" y="0" class="meta">03 / ДОМ, БАРВИХА</text>
+    <text x="0" y="14" class="meta">ПОПЕРЕЧНЫЙ РАЗРЕЗ · 1:200 · Б-Б</text>
+    <text x="0" y="28" class="meta">580 m² · 2024 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

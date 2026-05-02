@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дом, Рублёвка — поэтажный план">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .ghost { stroke: #BBBBBB; stroke-width: 0.5; fill: none; stroke-dasharray: 3 3; }
+    .glass { stroke: #0A0A0A; stroke-width: 0.6; fill: none; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Forest line (north, ghost) -->
+  <circle cx="80" cy="120" r="14" class="ghost"/>
+  <circle cx="180" cy="100" r="12" class="ghost"/>
+  <circle cx="280" cy="115" r="14" class="ghost"/>
+  <circle cx="400" cy="100" r="12" class="ghost"/>
+  <circle cx="520" cy="115" r="14" class="ghost"/>
+  <circle cx="640" cy="105" r="12" class="ghost"/>
+  <circle cx="740" cy="120" r="14" class="ghost"/>
+
+  <!-- Long single-story rectangular footprint -->
+  <line x1="60" y1="200" x2="740" y2="200" class="wall"/>
+  <line x1="740" y1="200" x2="740" y2="380" class="wall"/>
+  <!-- Full-height glazing along south facade — drawn as double thin glass line -->
+  <line x1="740" y1="380" x2="60" y2="380" class="glass"/>
+  <line x1="740" y1="384" x2="60" y2="384" class="glass"/>
+  <line x1="60" y1="380" x2="60" y2="200" class="wall"/>
+
+  <!-- Glazing mullions (vertical thin lines at intervals) -->
+  <line x1="120" y1="380" x2="120" y2="384" class="glass"/>
+  <line x1="180" y1="380" x2="180" y2="384" class="glass"/>
+  <line x1="240" y1="380" x2="240" y2="384" class="glass"/>
+  <line x1="300" y1="380" x2="300" y2="384" class="glass"/>
+  <line x1="360" y1="380" x2="360" y2="384" class="glass"/>
+  <line x1="420" y1="380" x2="420" y2="384" class="glass"/>
+  <line x1="480" y1="380" x2="480" y2="384" class="glass"/>
+  <line x1="540" y1="380" x2="540" y2="384" class="glass"/>
+  <line x1="600" y1="380" x2="600" y2="384" class="glass"/>
+  <line x1="660" y1="380" x2="660" y2="384" class="glass"/>
+  <line x1="720" y1="380" x2="720" y2="384" class="glass"/>
+
+  <!-- Inner walls — service strip on north + 3 bedrooms east -->
+  <line x1="60" y1="280" x2="500" y2="280" class="inner"/>
+  <line x1="500" y1="200" x2="500" y2="380" class="inner"/>
+  <line x1="500" y1="280" x2="740" y2="280" class="inner"/>
+  <line x1="580" y1="280" x2="580" y2="380" class="inner"/>
+  <line x1="660" y1="280" x2="660" y2="380" class="inner"/>
+
+  <!-- Service strip subdivisions -->
+  <line x1="180" y1="200" x2="180" y2="280" class="inner"/>
+  <line x1="320" y1="200" x2="320" y2="280" class="inner"/>
+
+  <!-- Doors -->
+  <line x1="200" y1="280" x2="240" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="500" y1="320" x2="500" y2="350" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="540" y1="280" x2="570" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="615" y1="280" x2="645" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="690" y1="280" x2="720" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+
+  <!-- Common area — open living/dining/kitchen 80m² -->
+  <!-- Kitchen island -->
+  <rect x="110" y="320" width="180" height="30" class="furn"/>
+  <!-- Dining table -->
+  <rect x="320" y="320" width="120" height="40" class="furn"/>
+  <!-- Living seating arrangement -->
+  <line x1="80" y1="350" x2="80" y2="380" class="ghost"/>
+
+  <!-- Bedrooms furniture -->
+  <rect x="520" y="310" width="50" height="40" class="furn"/>
+  <rect x="600" y="310" width="50" height="40" class="furn"/>
+  <rect x="680" y="310" width="50" height="40" class="furn"/>
+
+  <!-- Bathrooms in service strip -->
+  <rect x="200" y="220" width="40" height="30" class="furn"/>
+  <rect x="270" y="220" width="40" height="30" class="furn"/>
+
+  <!-- Sun direction indicator -->
+  <g transform="translate(400, 480)">
+    <text x="0" y="0" class="meta" text-anchor="middle">↑ ПАНОРАМНОЕ ОСТЕКЛЕНИЕ — НА ЛЕС</text>
+  </g>
+
+  <!-- Room labels -->
+  <text x="120" y="245" class="room" text-anchor="middle">МАСТЕР</text>
+  <text x="245" y="245" class="room" text-anchor="middle">САНУЗЛЫ</text>
+  <text x="400" y="245" class="room" text-anchor="middle">ВЕСТИБЮЛЬ</text>
+  <text x="220" y="370" class="room" text-anchor="middle">ОБЩАЯ ЗОНА — 80 m²</text>
+  <text x="540" y="370" class="room" text-anchor="middle">СПАЛЬНЯ 01</text>
+  <text x="620" y="370" class="room" text-anchor="middle">СПАЛЬНЯ 02</text>
+  <text x="700" y="370" class="room" text-anchor="middle">СПАЛЬНЯ 03</text>
+  <text x="620" y="245" class="room" text-anchor="middle">САНУЗЛЫ</text>
+
+  <!-- North arrow -->
+  <g transform="translate(745, 60)">
+    <line x1="0" y1="0" x2="0" y2="-26" class="wall"/>
+    <polygon points="0,-26 -3,-18 3,-18" fill="#0A0A0A"/>
+    <text x="0" y="14" class="meta" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 555)">
+    <line x1="0" y1="0" x2="80" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="32" y1="-3" x2="32" y2="3" class="wall"/>
+    <line x1="80" y1="-3" x2="80" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="32" y="14" class="meta">2</text>
+    <text x="76" y="14" class="meta">5 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 540)">
+    <text x="0" y="0" class="meta">07 / ДОМ, РУБЛЁВКА</text>
+    <text x="0" y="14" class="meta">ПЛАН · 1:200 · ОДИН УРОВЕНЬ</text>
+    <text x="0" y="28" class="meta">650 m² · 2023 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

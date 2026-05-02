@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Квартира, Тверская — поэтажный план">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .moulding { stroke: #6B6B6B; stroke-width: 0.4; fill: none; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Footprint with classical chamfered corners (slight bays) -->
+  <line x1="120" y1="160" x2="680" y2="160" class="wall"/>
+  <line x1="680" y1="160" x2="680" y2="450" class="wall"/>
+  <line x1="680" y1="450" x2="120" y2="450" class="wall"/>
+  <line x1="120" y1="450" x2="120" y2="160" class="wall"/>
+
+  <!-- Classical moulding indicated as inner offset line on perimeter (mouldings preserved) -->
+  <rect x="128" y="168" width="544" height="274" class="moulding"/>
+
+  <!-- Bay window on north (Tverskaya facade) -->
+  <line x1="350" y1="160" x2="350" y2="135" class="wall"/>
+  <line x1="450" y1="160" x2="450" y2="135" class="wall"/>
+  <line x1="350" y1="135" x2="450" y2="135" class="wall"/>
+  <line x1="352" y1="137" x2="448" y2="137" class="inner"/>
+
+  <!-- Enfilade — 3 reception rooms aligned along north -->
+  <line x1="280" y1="160" x2="280" y2="320" class="inner"/>
+  <line x1="500" y1="160" x2="500" y2="320" class="inner"/>
+
+  <!-- Service zone south -->
+  <line x1="120" y1="320" x2="680" y2="320" class="inner"/>
+
+  <!-- Aligned enfilade doors (centered openings) -->
+  <line x1="260" y1="320" x2="300" y2="320" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="480" y1="320" x2="520" y2="320" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="280" y1="240" x2="280" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="500" y1="240" x2="500" y2="280" stroke="#FFFFFF" stroke-width="2.5"/>
+
+  <!-- Service subdivisions -->
+  <line x1="300" y1="320" x2="300" y2="450" class="inner"/>
+  <line x1="450" y1="320" x2="450" y2="450" class="inner"/>
+  <line x1="560" y1="320" x2="560" y2="450" class="inner"/>
+
+  <!-- Vintage Wegner / Juhl chair markers (small circles) -->
+  <circle cx="180" cy="220" r="8" class="furn"/>
+  <circle cx="200" cy="240" r="8" class="furn"/>
+  <circle cx="220" cy="220" r="8" class="furn"/>
+  <circle cx="180" cy="270" r="8" class="furn"/>
+
+  <!-- Wegner sofa (dining room) -->
+  <rect x="350" y="200" width="100" height="40" class="furn"/>
+  <line x1="350" y1="200" x2="350" y2="180" class="furn"/>
+  <line x1="450" y1="200" x2="450" y2="180" class="furn"/>
+
+  <!-- Juhl table (cabinet) -->
+  <ellipse cx="600" cy="240" rx="50" ry="25" class="furn"/>
+
+  <!-- Master bed -->
+  <rect x="160" y="380" width="80" height="50" class="furn"/>
+
+  <!-- Kitchen counters -->
+  <line x1="320" y1="350" x2="430" y2="350" class="furn"/>
+  <line x1="320" y1="340" x2="430" y2="340" class="furn"/>
+  <rect x="350" y="380" width="80" height="30" class="furn"/>
+
+  <!-- Room labels -->
+  <text x="200" y="195" class="room" text-anchor="middle">САЛОН</text>
+  <text x="200" y="210" class="meta" text-anchor="middle">— коллекция XX в.</text>
+  <text x="390" y="195" class="room" text-anchor="middle">СТОЛОВАЯ</text>
+  <text x="600" y="195" class="room" text-anchor="middle">КАБИНЕТ</text>
+  <text x="200" y="395" class="room" text-anchor="middle">СПАЛЬНЯ</text>
+  <text x="380" y="395" class="room" text-anchor="middle">КУХНЯ</text>
+  <text x="510" y="395" class="room" text-anchor="middle">САНУЗЕЛ</text>
+  <text x="620" y="395" class="room" text-anchor="middle">ГАРД.</text>
+
+  <!-- North arrow -->
+  <g transform="translate(745, 70)">
+    <line x1="0" y1="0" x2="0" y2="-26" class="wall"/>
+    <polygon points="0,-26 -3,-18 3,-18" fill="#0A0A0A"/>
+    <text x="0" y="14" class="meta" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 555)">
+    <line x1="0" y1="0" x2="60" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="20" y1="-3" x2="20" y2="3" class="wall"/>
+    <line x1="60" y1="-3" x2="60" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="20" y="14" class="meta">1</text>
+    <text x="56" y="14" class="meta">3 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 540)">
+    <text x="0" y="0" class="meta">06 / КВАРТИРА, ТВЕРСКАЯ</text>
+    <text x="0" y="14" class="meta">ПЛАН · 1:100 · СОХРАНЁННАЯ ЛЕПНИНА</text>
+    <text x="0" y="28" class="meta">210 m² · 2024 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

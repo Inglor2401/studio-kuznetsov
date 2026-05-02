@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Лофт, Хамовники — поперечный разрез">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .filled { fill: #0A0A0A; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Floor & ceiling — tall 4.8m -->
+  <line x1="80" y1="470" x2="720" y2="470" class="wall"/>
+  <line x1="80" y1="180" x2="720" y2="180" class="wall"/>
+
+  <!-- Industrial roof structure indication (truss above ceiling, ghost) -->
+  <line x1="80" y1="180" x2="80" y2="160" class="furn"/>
+  <line x1="80" y1="160" x2="120" y2="140" class="furn"/>
+  <line x1="120" y1="140" x2="200" y2="160" class="furn"/>
+  <line x1="200" y1="160" x2="280" y2="140" class="furn"/>
+  <line x1="280" y1="140" x2="360" y2="160" class="furn"/>
+  <line x1="360" y1="160" x2="440" y2="140" class="furn"/>
+  <line x1="440" y1="140" x2="520" y2="160" class="furn"/>
+  <line x1="520" y1="160" x2="600" y2="140" class="furn"/>
+  <line x1="600" y1="140" x2="680" y2="160" class="furn"/>
+  <line x1="680" y1="160" x2="720" y2="180" class="furn"/>
+  <line x1="80" y1="160" x2="720" y2="160" class="furn"/>
+
+  <!-- Outer walls -->
+  <line x1="80" y1="180" x2="80" y2="470" class="wall"/>
+  <line x1="720" y1="180" x2="720" y2="470" class="wall"/>
+
+  <!-- Cast iron columns (3 visible in this section) -->
+  <rect x="218" y="180" width="14" height="290" class="filled"/>
+  <rect x="394" y="180" width="14" height="290" class="filled"/>
+  <rect x="568" y="180" width="14" height="290" class="filled"/>
+
+  <!-- Column capitals (top) -->
+  <line x1="210" y1="195" x2="240" y2="195" class="furn"/>
+  <line x1="386" y1="195" x2="416" y2="195" class="furn"/>
+  <line x1="560" y1="195" x2="590" y2="195" class="furn"/>
+
+  <!-- Central black cube (private functions inside) -->
+  <rect x="320" y="290" width="180" height="180" class="filled"/>
+  <!-- White interior subdivisions -->
+  <line x1="380" y1="290" x2="380" y2="470" stroke="#FFFFFF" stroke-width="0.8"/>
+  <line x1="440" y1="290" x2="440" y2="470" stroke="#FFFFFF" stroke-width="0.8"/>
+  <line x1="320" y1="380" x2="500" y2="380" stroke="#FFFFFF" stroke-width="0.8"/>
+
+  <!-- Cube door (white opening) -->
+  <line x1="500" y1="370" x2="500" y2="420" stroke="#FFFFFF" stroke-width="3"/>
+
+  <!-- Furniture outside cube — kitchen island -->
+  <line x1="100" y1="470" x2="100" y2="430" class="furn"/>
+  <line x1="100" y1="430" x2="200" y2="430" class="furn"/>
+  <line x1="200" y1="430" x2="200" y2="470" class="furn"/>
+
+  <!-- Living seating south of cube -->
+  <line x1="540" y1="470" x2="540" y2="445" class="furn"/>
+  <line x1="540" y1="445" x2="640" y2="445" class="furn"/>
+  <line x1="640" y1="445" x2="640" y2="470" class="furn"/>
+
+  <!-- Pendant lamp suspended -->
+  <line x1="180" y1="180" x2="180" y2="280" class="furn"/>
+  <circle cx="180" cy="288" r="6" class="furn"/>
+  <line x1="600" y1="180" x2="600" y2="280" class="furn"/>
+  <circle cx="600" cy="288" r="6" class="furn"/>
+
+  <!-- Person silhouette for scale (4.8m ceiling makes person look small) -->
+  <line x1="260" y1="470" x2="260" y2="395" class="furn"/>
+  <circle cx="260" cy="388" r="6" class="furn"/>
+
+  <!-- Level labels -->
+  <text x="50" y="195" class="meta">+4.80 — ПОТОЛОК</text>
+  <text x="50" y="465" class="meta">+0.00 — УР. ПОЛА</text>
+
+  <!-- Annotations -->
+  <text x="120" y="335" class="room" text-anchor="middle">КУХНЯ — ГОСТИНАЯ</text>
+  <text x="660" y="335" class="room" text-anchor="middle">СТОЛОВАЯ — ГОСТИНАЯ</text>
+  <text x="410" y="385" class="meta" fill="#FFFFFF" text-anchor="middle">КУБ</text>
+  <text x="225" y="125" class="meta" text-anchor="middle">ЧУГ. КОЛОННА</text>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 575)">
+    <line x1="0" y1="0" x2="60" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="20" y1="-3" x2="20" y2="3" class="wall"/>
+    <line x1="60" y1="-3" x2="60" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="20" y="14" class="meta">1</text>
+    <text x="56" y="14" class="meta">3 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 560)">
+    <text x="0" y="0" class="meta">04 / ЛОФТ, ХАМОВНИКИ</text>
+    <text x="0" y="14" class="meta">РАЗРЕЗ · 1:100 · ВЫСОТА 4.8 М</text>
+    <text x="0" y="28" class="meta">180 m² · 2023 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

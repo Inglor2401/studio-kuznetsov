@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Пентхаус, Патриаршие — поэтажный план, уровень 1">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Outer walls (with window openings on north facade) -->
+  <line x1="92" y1="145" x2="160" y2="145" class="wall"/>
+  <line x1="160" y1="143" x2="240" y2="143" class="inner"/>
+  <line x1="160" y1="147" x2="240" y2="147" class="inner"/>
+  <line x1="240" y1="145" x2="300" y2="145" class="wall"/>
+  <line x1="300" y1="143" x2="400" y2="143" class="inner"/>
+  <line x1="300" y1="147" x2="400" y2="147" class="inner"/>
+  <line x1="400" y1="145" x2="460" y2="145" class="wall"/>
+  <line x1="460" y1="143" x2="560" y2="143" class="inner"/>
+  <line x1="460" y1="147" x2="560" y2="147" class="inner"/>
+  <line x1="560" y1="145" x2="630" y2="145" class="wall"/>
+  <line x1="630" y1="143" x2="700" y2="143" class="inner"/>
+  <line x1="630" y1="147" x2="700" y2="147" class="inner"/>
+  <line x1="700" y1="145" x2="708" y2="145" class="wall"/>
+  <line x1="708" y1="145" x2="708" y2="453" class="wall"/>
+  <line x1="708" y1="453" x2="92" y2="453" class="wall"/>
+  <line x1="92" y1="453" x2="92" y2="145" class="wall"/>
+
+  <!-- Inner walls -->
+  <line x1="560" y1="145" x2="560" y2="453" class="inner"/>
+  <line x1="92" y1="325" x2="560" y2="325" class="inner"/>
+  <line x1="280" y1="325" x2="280" y2="453" class="inner"/>
+  <line x1="420" y1="325" x2="420" y2="453" class="inner"/>
+
+  <!-- Door openings + arcs -->
+  <line x1="200" y1="325" x2="240" y2="325" stroke="#FFFFFF" stroke-width="2.5"/>
+  <path d="M 200 325 A 40 40 0 0 1 240 325" class="furn"/>
+  <line x1="540" y1="220" x2="560" y2="240" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="540" y1="220" x2="560" y2="220" class="inner"/>
+  <line x1="560" y1="220" x2="560" y2="260" stroke="#FFFFFF" stroke-width="2.5"/>
+  <path d="M 560 220 A 40 40 0 0 1 560 260" class="furn"/>
+  <line x1="340" y1="453" x2="380" y2="453" stroke="#FFFFFF" stroke-width="2.5"/>
+
+  <!-- Fireplace 1 (Living) — in west inner wall of library -->
+  <rect x="554" y="180" width="12" height="36" fill="#0A0A0A"/>
+  <!-- Fireplace 2 (Dining north wall) -->
+  <rect x="318" y="139" width="32" height="12" fill="#0A0A0A"/>
+
+  <!-- Library built-ins (perimeter shelves) -->
+  <line x1="572" y1="155" x2="572" y2="445" class="furn"/>
+  <line x1="696" y1="155" x2="696" y2="445" class="furn"/>
+  <line x1="572" y1="200" x2="696" y2="200" class="furn"/>
+  <line x1="572" y1="260" x2="696" y2="260" class="furn"/>
+  <line x1="572" y1="320" x2="696" y2="320" class="furn"/>
+  <line x1="572" y1="380" x2="696" y2="380" class="furn"/>
+
+  <!-- Stair (rises to level 02) -->
+  <g transform="translate(420, 335)">
+    <rect x="10" y="10" width="120" height="100" class="inner"/>
+    <line x1="10" y1="30" x2="130" y2="30" class="furn"/>
+    <line x1="10" y1="50" x2="130" y2="50" class="furn"/>
+    <line x1="10" y1="70" x2="130" y2="70" class="furn"/>
+    <line x1="10" y1="90" x2="130" y2="90" class="furn"/>
+    <text x="70" y="64" class="meta" text-anchor="middle">↑ 02</text>
+  </g>
+
+  <!-- Furniture suggestions: dining table -->
+  <rect x="320" y="200" width="100" height="40" class="furn"/>
+  <!-- Living seating -->
+  <rect x="180" y="220" width="120" height="50" class="furn"/>
+  <!-- Master bed -->
+  <rect x="120" y="360" width="80" height="50" class="furn"/>
+
+  <!-- Room labels -->
+  <text x="240" y="195" class="room" text-anchor="middle">СТОЛОВАЯ</text>
+  <text x="180" y="290" class="room" text-anchor="middle">ГОСТИНАЯ — КУХНЯ</text>
+  <text x="500" y="240" class="room" text-anchor="middle">ХОЛЛ</text>
+  <text x="635" y="295" class="room" text-anchor="middle">БИБЛИОТЕКА</text>
+  <text x="180" y="395" class="room" text-anchor="middle">СПАЛЬНЯ</text>
+  <text x="350" y="395" class="room" text-anchor="middle">САНУЗЕЛ</text>
+
+  <!-- North arrow -->
+  <g transform="translate(745, 70)">
+    <line x1="0" y1="0" x2="0" y2="-26" class="wall"/>
+    <polygon points="0,-26 -3,-18 3,-18" fill="#0A0A0A"/>
+    <text x="0" y="14" class="meta" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 555)">
+    <line x1="0" y1="0" x2="84" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="28" y1="-3" x2="28" y2="3" class="wall"/>
+    <line x1="84" y1="-3" x2="84" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="28" y="14" class="meta">1</text>
+    <text x="80" y="14" class="meta">3 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 540)">
+    <text x="0" y="0" class="meta">01 / ПЕНТХАУС, ПАТРИАРШИЕ</text>
+    <text x="0" y="14" class="meta">ПЛАН · 1:100 · УРОВЕНЬ 1</text>
+    <text x="0" y="28" class="meta">240 m² · 2024 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

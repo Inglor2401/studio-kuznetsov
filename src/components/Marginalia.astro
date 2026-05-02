@@ -1,0 +1,37 @@
+---
+interface Props {
+  number?: string;
+  location?: string;
+  area?: number;
+  year?: number;
+  materials?: string;
+  align?: 'left' | 'right';
+}
+
+const { number, location, area, year, materials, align = 'right' } = Astro.props;
+---
+
+<aside class:list={['marginalia', 'mono', { 'align-left': align === 'left' }]}>
+  {number && <span>{number}</span>}
+  {location && <span>{location}</span>}
+  {area && <span>{area} m²</span>}
+  {year && <span>{year}</span>}
+  {materials && <span>{materials}</span>}
+</aside>
+
+<style>
+  .marginalia {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+  .marginalia.align-left {
+    text-align: left;
+  }
+  @media (max-width: 720px) {
+    .marginalia {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Лофт, Хамовники — поэтажный план">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .filled { fill: #0A0A0A; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Open rectangle, 18m × 10m -->
+  <rect x="100" y="160" width="600" height="290" class="wall"/>
+
+  <!-- Cast iron column grid (8 columns) — circles -->
+  <circle cx="220" cy="230" r="6" class="filled"/>
+  <circle cx="400" cy="230" r="6" class="filled"/>
+  <circle cx="580" cy="230" r="6" class="filled"/>
+  <circle cx="220" cy="380" r="6" class="filled"/>
+  <circle cx="400" cy="380" r="6" class="filled"/>
+  <circle cx="580" cy="380" r="6" class="filled"/>
+
+  <!-- Central black cube — solid filled rectangle -->
+  <rect x="320" y="240" width="180" height="140" class="filled"/>
+
+  <!-- Cube interior subdivision (visible as light grey on filled) -->
+  <line x1="380" y1="240" x2="380" y2="380" stroke="#FFFFFF" stroke-width="0.6"/>
+  <line x1="440" y1="240" x2="440" y2="380" stroke="#FFFFFF" stroke-width="0.6"/>
+  <line x1="320" y1="310" x2="500" y2="310" stroke="#FFFFFF" stroke-width="0.6"/>
+
+  <!-- Cube door opening (white slot) -->
+  <line x1="500" y1="290" x2="500" y2="330" stroke="#FFFFFF" stroke-width="3"/>
+
+  <!-- Kitchen along south wall -->
+  <line x1="120" y1="430" x2="280" y2="430" class="furn"/>
+  <line x1="120" y1="420" x2="280" y2="420" class="furn"/>
+  <line x1="160" y1="420" x2="160" y2="430" class="furn"/>
+  <line x1="200" y1="420" x2="200" y2="430" class="furn"/>
+  <line x1="240" y1="420" x2="240" y2="430" class="furn"/>
+
+  <!-- Kitchen island -->
+  <rect x="180" y="370" width="120" height="30" class="furn"/>
+
+  <!-- Living seating south of cube -->
+  <rect x="540" y="400" width="100" height="30" class="furn"/>
+  <rect x="540" y="180" width="100" height="30" class="furn"/>
+
+  <!-- Long dining table south of cube -->
+  <rect x="540" y="270" width="120" height="40" class="furn"/>
+
+  <!-- Window indication on long walls -->
+  <line x1="160" y1="158" x2="280" y2="158" class="inner"/>
+  <line x1="160" y1="162" x2="280" y2="162" class="inner"/>
+  <line x1="320" y1="158" x2="500" y2="158" class="inner"/>
+  <line x1="320" y1="162" x2="500" y2="162" class="inner"/>
+  <line x1="540" y1="158" x2="660" y2="158" class="inner"/>
+  <line x1="540" y1="162" x2="660" y2="162" class="inner"/>
+
+  <!-- Entry door -->
+  <line x1="100" y1="280" x2="100" y2="320" stroke="#FFFFFF" stroke-width="3"/>
+
+  <!-- Room labels -->
+  <text x="220" y="270" class="room" text-anchor="middle">КУХНЯ</text>
+  <text x="220" y="395" class="room" text-anchor="middle">ОСТРОВ</text>
+  <text x="600" y="265" class="room" text-anchor="middle">СТОЛОВАЯ</text>
+  <text x="600" y="395" class="room" text-anchor="middle">ГОСТИНАЯ</text>
+  <text x="600" y="200" class="room" text-anchor="middle">КАБИНЕТ</text>
+  <text x="410" y="320" class="meta" fill="#FFFFFF" text-anchor="middle">КУБ</text>
+  <text x="350" y="320" class="meta" fill="#FFFFFF" text-anchor="middle">СПАЛЬНЯ</text>
+  <text x="470" y="290" class="meta" fill="#FFFFFF" text-anchor="middle">ВАН.</text>
+  <text x="470" y="345" class="meta" fill="#FFFFFF" text-anchor="middle">ГАРД.</text>
+
+  <!-- Column reference labels -->
+  <text x="220" y="135" class="meta" text-anchor="middle">A</text>
+  <text x="400" y="135" class="meta" text-anchor="middle">B</text>
+  <text x="580" y="135" class="meta" text-anchor="middle">C</text>
+  <text x="80" y="234" class="meta" text-anchor="end">1</text>
+  <text x="80" y="384" class="meta" text-anchor="end">2</text>
+
+  <!-- North arrow -->
+  <g transform="translate(745, 70)">
+    <line x1="0" y1="0" x2="0" y2="-26" class="wall"/>
+    <polygon points="0,-26 -3,-18 3,-18" fill="#0A0A0A"/>
+    <text x="0" y="14" class="meta" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 555)">
+    <line x1="0" y1="0" x2="60" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="20" y1="-3" x2="20" y2="3" class="wall"/>
+    <line x1="60" y1="-3" x2="60" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="20" y="14" class="meta">1</text>
+    <text x="56" y="14" class="meta">3 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 540)">
+    <text x="0" y="0" class="meta">04 / ЛОФТ, ХАМОВНИКИ</text>
+    <text x="0" y="14" class="meta">ПЛАН · 1:100 · ОТКРЫТАЯ СХЕМА</text>
+    <text x="0" y="28" class="meta">180 m² · 2023 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

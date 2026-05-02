@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Резиденция, Жуковка — продольный разрез">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .ghost { stroke: #BBBBBB; stroke-width: 0.5; fill: none; stroke-dasharray: 3 3; }
+    .water { stroke: #6B6B6B; stroke-width: 0.5; fill: none; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Ground line -->
+  <line x1="20" y1="430" x2="780" y2="430" class="wall"/>
+  <!-- Ground hatching -->
+  <line x1="40" y1="435" x2="30" y2="445" class="furn"/>
+  <line x1="100" y1="435" x2="90" y2="445" class="furn"/>
+  <line x1="200" y1="435" x2="190" y2="445" class="furn"/>
+  <line x1="300" y1="435" x2="290" y2="445" class="furn"/>
+  <line x1="400" y1="435" x2="390" y2="445" class="furn"/>
+  <line x1="500" y1="435" x2="490" y2="445" class="furn"/>
+  <line x1="600" y1="435" x2="590" y2="445" class="furn"/>
+  <line x1="700" y1="435" x2="690" y2="445" class="furn"/>
+  <line x1="760" y1="435" x2="750" y2="445" class="furn"/>
+
+  <!-- Long low estate cross-section -->
+  <!-- Main house body (bedrooms wing) -->
+  <line x1="80" y1="430" x2="80" y2="280" class="wall"/>
+  <line x1="80" y1="280" x2="500" y2="280" class="wall"/>
+  <!-- Step down to pool wing -->
+  <line x1="500" y1="280" x2="500" y2="320" class="wall"/>
+  <!-- Pool wing (slightly lower roof) -->
+  <line x1="500" y1="320" x2="700" y2="320" class="wall"/>
+  <line x1="700" y1="320" x2="700" y2="430" class="wall"/>
+  <!-- Roof flat continuing -->
+  <line x1="80" y1="272" x2="500" y2="272" class="inner"/>
+  <line x1="500" y1="312" x2="700" y2="312" class="inner"/>
+
+  <!-- Main house internal -->
+  <line x1="200" y1="430" x2="200" y2="280" class="inner"/>
+  <line x1="320" y1="430" x2="320" y2="280" class="inner"/>
+  <line x1="400" y1="430" x2="400" y2="280" class="inner"/>
+
+  <!-- Pool inside wing — drawn in section -->
+  <rect x="540" y="380" width="120" height="50" fill="none" class="inner"/>
+  <line x1="545" y1="395" x2="655" y2="395" class="water"/>
+  <line x1="545" y1="410" x2="655" y2="410" class="water"/>
+  <line x1="545" y1="425" x2="655" y2="425" class="water"/>
+
+  <!-- Rooms in main house -->
+  <text x="140" y="365" class="room" text-anchor="middle">ДЕТСКАЯ</text>
+  <text x="260" y="365" class="room" text-anchor="middle">ДЕТСКАЯ</text>
+  <text x="360" y="365" class="room" text-anchor="middle">ВАН.</text>
+  <text x="450" y="365" class="room" text-anchor="middle">ОБЩАЯ ЗОНА</text>
+  <text x="600" y="360" class="room" text-anchor="middle">БАССЕЙН — ПОД ОДНОЙ КРЫШЕЙ</text>
+
+  <!-- Furniture in bedrooms -->
+  <rect x="100" y="395" width="60" height="30" class="furn"/>
+  <rect x="220" y="395" width="60" height="30" class="furn"/>
+
+  <!-- Detached sauna (separate building, distance shown) -->
+  <line x1="80" y1="430" x2="20" y2="510" class="ghost"/>
+  <g transform="translate(40, 520)">
+    <rect x="0" y="0" width="120" height="50" class="wall"/>
+    <line x1="40" y1="0" x2="40" y2="50" class="inner"/>
+    <line x1="80" y1="0" x2="80" y2="50" class="inner"/>
+    <text x="60" y="-8" class="room" text-anchor="middle">БАНЯ — ПО ДИАГОНАЛИ</text>
+  </g>
+
+  <!-- Trees (forest line, ghost) -->
+  <circle cx="50" cy="180" r="22" class="ghost"/>
+  <line x1="50" y1="180" x2="50" y2="225" class="ghost"/>
+  <circle cx="760" cy="180" r="20" class="ghost"/>
+  <line x1="760" y1="180" x2="760" y2="225" class="ghost"/>
+
+  <!-- Fence-free indication (north side, into forest) -->
+  <text x="40" y="80" class="meta">↑ БЕЗ ЗАБОРА — В ЛЕС</text>
+
+  <!-- Scale figures -->
+  <line x1="450" y1="430" x2="450" y2="385" class="furn"/>
+  <circle cx="450" cy="380" r="5" class="furn"/>
+
+  <!-- Level labels -->
+  <text x="50" y="270" class="meta">+3.30</text>
+  <text x="50" y="425" class="meta">+0.00</text>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 575)">
+    <line x1="0" y1="0" x2="100" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="40" y1="-3" x2="40" y2="3" class="wall"/>
+    <line x1="100" y1="-3" x2="100" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="40" y="14" class="meta">5</text>
+    <text x="96" y="14" class="meta">10 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 560)">
+    <text x="0" y="0" class="meta">05 / РЕЗИДЕНЦИЯ, ЖУКОВКА</text>
+    <text x="0" y="14" class="meta">ПРОДОЛЬНЫЙ РАЗРЕЗ · 1:300</text>
+    <text x="0" y="28" class="meta">720 m² · 2022 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

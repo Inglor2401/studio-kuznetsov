@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дача, Николина Гора — поэтажный план">
+  <style>
+    text { font-family: ui-monospace, 'JetBrains Mono', Menlo, monospace; }
+    .room { font-size: 10px; fill: #0A0A0A; letter-spacing: 0.08em; }
+    .meta { font-size: 9px; fill: #0A0A0A; letter-spacing: 0.06em; }
+    .wall { stroke: #0A0A0A; stroke-width: 1.5; fill: none; }
+    .inner { stroke: #0A0A0A; stroke-width: 0.8; fill: none; }
+    .furn { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+    .ghost { stroke: #BBBBBB; stroke-width: 0.5; fill: none; stroke-dasharray: 3 3; }
+    .terrace { stroke: #0A0A0A; stroke-width: 0.5; fill: none; }
+  </style>
+  <rect width="800" height="600" fill="#FFFFFF"/>
+
+  <!-- Trees around (forest plot) -->
+  <circle cx="60" cy="80" r="14" class="ghost"/>
+  <circle cx="160" cy="60" r="10" class="ghost"/>
+  <circle cx="640" cy="60" r="12" class="ghost"/>
+  <circle cx="740" cy="80" r="14" class="ghost"/>
+  <circle cx="60" cy="540" r="12" class="ghost"/>
+  <circle cx="740" cy="540" r="14" class="ghost"/>
+
+  <!-- Symmetrical traditional cottage footprint, T-shape with wings -->
+  <!-- Main central body -->
+  <line x1="280" y1="180" x2="520" y2="180" class="wall"/>
+  <line x1="520" y1="180" x2="520" y2="220" class="wall"/>
+  <!-- East wing -->
+  <line x1="520" y1="220" x2="660" y2="220" class="wall"/>
+  <line x1="660" y1="220" x2="660" y2="380" class="wall"/>
+  <line x1="660" y1="380" x2="520" y2="380" class="wall"/>
+  <!-- Back to main body -->
+  <line x1="520" y1="380" x2="520" y2="420" class="wall"/>
+  <line x1="520" y1="420" x2="280" y2="420" class="wall"/>
+  <!-- West wing -->
+  <line x1="280" y1="420" x2="280" y2="380" class="wall"/>
+  <line x1="280" y1="380" x2="140" y2="380" class="wall"/>
+  <line x1="140" y1="380" x2="140" y2="220" class="wall"/>
+  <line x1="140" y1="220" x2="280" y2="220" class="wall"/>
+  <line x1="280" y1="220" x2="280" y2="180" class="wall"/>
+
+  <!-- Inner walls — symmetric layout -->
+  <!-- East wing subdivision -->
+  <line x1="520" y1="300" x2="660" y2="300" class="inner"/>
+  <!-- West wing subdivision -->
+  <line x1="140" y1="300" x2="280" y2="300" class="inner"/>
+  <!-- Central hall divisions -->
+  <line x1="380" y1="220" x2="380" y2="380" class="inner"/>
+  <line x1="280" y1="300" x2="380" y2="300" class="inner"/>
+
+  <!-- Veranda along south facade (open structure with columns) -->
+  <line x1="280" y1="420" x2="520" y2="420" class="terrace"/>
+  <line x1="280" y1="490" x2="520" y2="490" class="terrace"/>
+  <line x1="280" y1="490" x2="280" y2="420" class="terrace"/>
+  <line x1="520" y1="490" x2="520" y2="420" class="terrace"/>
+  <!-- Veranda columns -->
+  <circle cx="290" cy="455" r="4" class="furn"/>
+  <circle cx="350" cy="455" r="4" class="furn"/>
+  <circle cx="400" cy="455" r="4" class="furn"/>
+  <circle cx="450" cy="455" r="4" class="furn"/>
+  <circle cx="510" cy="455" r="4" class="furn"/>
+  <!-- Veranda steps -->
+  <line x1="350" y1="490" x2="450" y2="490" class="terrace"/>
+  <line x1="350" y1="500" x2="450" y2="500" class="furn"/>
+  <line x1="350" y1="510" x2="450" y2="510" class="furn"/>
+
+  <!-- Side terraces -->
+  <rect x="60" y="280" width="80" height="100" class="terrace"/>
+  <rect x="660" y="280" width="80" height="100" class="terrace"/>
+
+  <!-- Furniture: dining at center -->
+  <ellipse cx="450" cy="340" rx="40" ry="25" class="furn"/>
+  <!-- Living -->
+  <rect x="310" y="340" width="50" height="30" class="furn"/>
+  <!-- Veranda chairs -->
+  <rect x="300" y="440" width="20" height="20" class="furn"/>
+  <rect x="490" y="440" width="20" height="20" class="furn"/>
+
+  <!-- Doors -->
+  <line x1="380" y1="220" x2="420" y2="220" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="380" y1="420" x2="420" y2="420" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="280" y1="350" x2="280" y2="380" stroke="#FFFFFF" stroke-width="2.5"/>
+  <line x1="520" y1="350" x2="520" y2="380" stroke="#FFFFFF" stroke-width="2.5"/>
+
+  <!-- 1948 indication — restoration mark on wall -->
+  <text x="280" y="170" class="meta" text-anchor="start">— ИСТОР. КОНТУР 1948</text>
+
+  <!-- Room labels -->
+  <text x="210" y="265" class="room" text-anchor="middle">СПАЛЬНЯ 01</text>
+  <text x="210" y="345" class="room" text-anchor="middle">САНУЗЕЛ</text>
+  <text x="335" y="265" class="room" text-anchor="middle">КАБИНЕТ</text>
+  <text x="335" y="345" class="room" text-anchor="middle">КУХНЯ</text>
+  <text x="450" y="265" class="room" text-anchor="middle">ГОСТИНАЯ — СТОЛОВАЯ</text>
+  <text x="590" y="265" class="room" text-anchor="middle">СПАЛЬНЯ 02</text>
+  <text x="590" y="345" class="room" text-anchor="middle">КЛАДОВАЯ</text>
+  <text x="100" y="335" class="room" text-anchor="middle">ТЕРРАСА</text>
+  <text x="700" y="335" class="room" text-anchor="middle">ТЕРРАСА</text>
+  <text x="400" y="475" class="room" text-anchor="middle">ВЕРАНДА</text>
+
+  <!-- North arrow -->
+  <g transform="translate(745, 70)">
+    <line x1="0" y1="0" x2="0" y2="-26" class="wall"/>
+    <polygon points="0,-26 -3,-18 3,-18" fill="#0A0A0A"/>
+    <text x="0" y="14" class="meta" text-anchor="middle">N</text>
+  </g>
+
+  <!-- Scale bar -->
+  <g transform="translate(60, 555)">
+    <line x1="0" y1="0" x2="80" y2="0" class="wall"/>
+    <line x1="0" y1="-3" x2="0" y2="3" class="wall"/>
+    <line x1="32" y1="-3" x2="32" y2="3" class="wall"/>
+    <line x1="80" y1="-3" x2="80" y2="3" class="wall"/>
+    <text x="0" y="14" class="meta">0</text>
+    <text x="32" y="14" class="meta">2</text>
+    <text x="76" y="14" class="meta">5 M</text>
+  </g>
+
+  <!-- Title block -->
+  <g transform="translate(500, 540)">
+    <text x="0" y="0" class="meta">08 / ДАЧА, НИКОЛИНА ГОРА</text>
+    <text x="0" y="14" class="meta">ПЛАН · 1:150 · РЕСТАВРАЦИЯ 1948</text>
+    <text x="0" y="28" class="meta">380 m² · 2022 · STUDIO KUZNETSOV</text>
+  </g>
+</svg>

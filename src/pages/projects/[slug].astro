@@ -1,0 +1,276 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../data/site';
+import type { Project } from '../../data/site';
+
+export function getStaticPaths() {
+  return SITE.projects.map((p) => ({
+    params: { slug: p.slug },
+    props: { project: p },
+  }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const idx = SITE.projects.findIndex((p) => p.slug === project.slug);
+const next = SITE.projects[(idx + 1) % SITE.projects.length];
+const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.length];
+---
+
+<Layout title={project.title} description={project.brief}>
+  <article class="project">
+    {/* Hero photo */}
+    <section class="hero">
+      <div class="cover">
+        <img src={project.cover} alt={project.title} />
+      </div>
+      <div class="container head">
+        <div class="title-block">
+          <span class="mono">{project.number} / {project.type}</span>
+          <h1>{project.title}</h1>
+        </div>
+        <aside class="mono details">
+          <p>{project.location}</p>
+          <p>{project.district}</p>
+          <p>{project.area} m²</p>
+          <p>{project.year}</p>
+          <p class="materials">{project.materials}</p>
+        </aside>
+      </div>
+    </section>
+
+    {/* Brief + story */}
+    <section class="text">
+      <div class="container">
+        <div class="grid">
+          <div>
+            <span class="mono">— Бриф</span>
+            <p class="brief">{project.brief}</p>
+          </div>
+          <div>
+            <span class="mono">— Решение</span>
+            <p class="story">{project.story}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Photo essay */}
+    <section class="photos">
+      {
+        project.photos.map((photo, i) => (
+          <figure class="photo img-hover">
+            <img src={photo} alt={`${project.title} — кадр ${i + 1}`} loading="lazy" />
+            <figcaption class="mono">
+              <span>{project.number}.{String(i + 1).padStart(2, '0')}</span>
+              <span>{project.title}</span>
+              <span>{project.year}</span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </section>
+
+    {/* Floor plan + section drawing — RADICAL MOVE */}
+    <section class="drawings">
+      <div class="container">
+        <header class="section-head">
+          <span class="mono">— Архитектурная документация</span>
+          <h2>План и разрез</h2>
+        </header>
+        <div class="grid">
+          <figure>
+            <span class="mono caption">Поэтажный план / 1:100</span>
+            <div class="svg-wrap">
+              <img src={project.floorplan} alt={`${project.title} — план`} loading="lazy" />
+            </div>
+          </figure>
+          <figure>
+            <span class="mono caption">Продольный разрез / 1:100</span>
+            <div class="svg-wrap">
+              <img src={project.section} alt={`${project.title} — разрез`} loading="lazy" />
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    {/* Next/prev */}
+    <nav class="next-prev" aria-label="Навигация по проектам">
+      <div class="container">
+        <a href={`/projects/${prev.slug}`} class="nav-link">
+          <span class="mono">← Предыдущий</span>
+          <span class="title">{prev.number} / {prev.title}</span>
+        </a>
+        <a href={`/projects/${next.slug}`} class="nav-link right">
+          <span class="mono">Следующий →</span>
+          <span class="title">{next.number} / {next.title}</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .hero .cover {
+    width: 100%;
+    height: 88vh;
+    overflow: hidden;
+    background: var(--color-surface-alt);
+  }
+  .hero .cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero .head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 64px;
+    align-items: end;
+    padding-top: 48px;
+    padding-bottom: 96px;
+  }
+  .hero .head h1 {
+    margin-top: 16px;
+  }
+  .hero .details {
+    text-align: right;
+    min-width: 320px;
+  }
+  .hero .details p {
+    margin: 0;
+  }
+  .hero .details .materials {
+    margin-top: 12px;
+    max-width: 320px;
+  }
+
+  .text {
+    padding: 96px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .text .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 96px;
+  }
+  .text .brief,
+  .text .story {
+    margin-top: 16px;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+  .text .brief {
+    color: var(--color-text-muted);
+  }
+
+  .photos {
+    display: grid;
+    gap: 0;
+  }
+  .photo {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface-alt);
+  }
+  .photo img {
+    width: 100%;
+    height: 88vh;
+    object-fit: cover;
+    display: block;
+  }
+  .photo figcaption {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    background: var(--color-bg);
+    padding: 8px 12px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .drawings {
+    padding: 128px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .drawings .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  .drawings figure {
+    display: grid;
+    gap: 16px;
+  }
+  .drawings .svg-wrap {
+    aspect-ratio: 4 / 3;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drawings .svg-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .next-prev {
+    padding: 64px 0 128px;
+    border-top: 1px solid var(--color-border);
+  }
+  .next-prev > .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .nav-link {
+    display: grid;
+    gap: 8px;
+  }
+  .nav-link .title {
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .nav-link.right {
+    text-align: right;
+  }
+
+  @media (max-width: 720px) {
+    .hero .cover {
+      height: 60vh;
+    }
+    .hero .head {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-bottom: 64px;
+    }
+    .hero .details {
+      text-align: left;
+    }
+    .text .grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .photo img {
+      height: 56vh;
+    }
+    .drawings .grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .next-prev > .container {
+      grid-template-columns: 1fr;
+    }
+    .nav-link.right {
+      text-align: left;
+    }
+  }
+</style>

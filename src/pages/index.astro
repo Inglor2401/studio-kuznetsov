@@ -1,0 +1,208 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
+import ProjectGrid from '../components/ProjectGrid.astro';
+import AntiList from '../components/AntiList.astro';
+
+const featured = SITE.projects[0];
+const restProjects = SITE.projects.slice(1);
+---
+
+<Layout>
+  {/* Featured project hero */}
+  <section class="featured">
+    <a href={`/projects/${featured.slug}`} class="featured-link img-hover">
+      <img src={featured.cover} alt={featured.title} />
+    </a>
+    <div class="container featured-meta">
+      <div class="title-block">
+        <span class="mono">{featured.number} / Featured</span>
+        <h1>{featured.title}</h1>
+      </div>
+      <aside class="mono details">
+        <p>{featured.location}</p>
+        <p>{featured.area} m²</p>
+        <p>{featured.year}</p>
+        <p>{featured.materials}</p>
+      </aside>
+    </div>
+  </section>
+
+  {/* Project grid */}
+  <section class="projects-section">
+    <div class="container">
+      <h2 class="section-h2">Избранные работы 2022–2024</h2>
+      <ProjectGrid projects={restProjects} />
+      <div class="all-link">
+        <a href="/projects" class="btn">Все проекты →</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Studio teaser */}
+  <section class="studio-teaser">
+    <div class="container">
+      <p class="lead">{SITE.studio.bioShort}</p>
+      <a href="/studio" class="btn">О студии →</a>
+    </div>
+  </section>
+
+  <AntiList />
+
+  {/* Press */}
+  <section class="press">
+    <div class="container--text">
+      <h2 class="section-h2">Признание</h2>
+      <ul>
+        {
+          SITE.press.map((item) => (
+            <li>
+              <div class="meta">
+                <span class="mono pub">{item.publication}</span>
+                <span class="mono year">{item.year}</span>
+              </div>
+              <span class="title">{item.title}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* Contact CTA */}
+  <section class="cta">
+    <div class="container">
+      <h2>Расскажите о проекте</h2>
+      <p>Брифинг занимает 60 минут. Шоурум на Патриарших, по записи.</p>
+      <a href="/contact" class="btn">Написать в студию →</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .featured {
+    position: relative;
+  }
+  .featured-link {
+    display: block;
+    height: 88vh;
+  }
+  .featured-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .featured-meta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    padding-top: 32px;
+    padding-bottom: 96px;
+  }
+  .featured-meta h1 {
+    margin-top: 16px;
+  }
+  .featured-meta .details {
+    text-align: right;
+  }
+  .featured-meta .details p {
+    margin: 0;
+  }
+
+  .projects-section {
+    padding: 96px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .section-h2 {
+    margin-bottom: 64px;
+  }
+  .all-link {
+    margin-top: 96px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .studio-teaser {
+    padding: 192px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .studio-teaser .lead {
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 32px 0 48px;
+    max-width: 1000px;
+  }
+
+  .press {
+    padding: 128px 0;
+  }
+  .press ul {
+    list-style: none;
+    margin-top: 48px;
+  }
+  .press li {
+    display: block;
+    padding: 32px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .press li:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .press .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+  .press .pub {
+    font-weight: 500;
+  }
+  .press .title {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    display: block;
+  }
+
+  .cta {
+    padding: 192px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .cta h2 {
+    margin-bottom: 24px;
+  }
+  .cta p {
+    margin-bottom: 48px;
+    max-width: 600px;
+    color: var(--color-text-muted);
+    font-size: 18px;
+  }
+
+  @media (max-width: 720px) {
+    .featured-link {
+      height: 70vh;
+    }
+    .featured-meta {
+      grid-template-columns: 1fr;
+      padding-bottom: 64px;
+    }
+    .featured-meta .details {
+      text-align: left;
+    }
+    .studio-teaser,
+    .cta {
+      padding: 96px 0;
+    }
+    .press li {
+      padding: 24px 0;
+    }
+    .press .title {
+      font-size: 18px;
+    }
+  }
+</style>

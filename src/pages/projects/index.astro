@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../data/site';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+---
+
+<Layout title="Проекты" description="Резиденции, городские квартиры и загородные дома STUDIO KUZNETSOV.">
+  <section class="hero">
+    <div class="container">
+      <span class="mono">— Проекты</span>
+      <h1>Восемь объектов, сданных в 2022–2024</h1>
+      <p class="lead">
+        Резиденции, городские квартиры от 200 m² и загородные дома.
+        Каждый объект ведёт лично Артём — от концепции до сдачи
+        с авторским надзором.
+      </p>
+    </div>
+  </section>
+
+  <section class="grid-section">
+    <div class="container">
+      <ProjectGrid projects={SITE.projects} />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 128px 0 64px;
+  }
+  .hero h1 {
+    margin-top: 24px;
+    max-width: 1100px;
+  }
+  .hero .lead {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 32px;
+    max-width: 640px;
+    color: var(--color-text-muted);
+  }
+  .grid-section {
+    padding: 64px 0 128px;
+  }
+</style>
