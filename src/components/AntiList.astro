@@ -3,96 +3,108 @@ import { SITE } from '../data/site';
 ---
 
 <section class="principles">
-  <div class="container--text">
-    <header class="lede">
+  <div class="container">
+    <header class="head">
+      <p class="mono eyebrow">— Принципы</p>
       <h2>Четыре границы, которые мы не пересекаем</h2>
-      <p>
+      <p class="lead">
         Они отсекают неподходящих клиентов до брифа,
         а нас самих — от компромиссов после.
       </p>
     </header>
 
-    <ol class="list">
+    <div class="manifesto">
       {
         SITE.antiList.map((p) => (
-          <li class="item">
-            <h3 class="title">{p.title}</h3>
-            <p class="text">{p.text}</p>
-          </li>
+          <p class="paragraph">
+            <strong>{p.title}.</strong> {p.text}
+          </p>
         ))
       }
-    </ol>
+    </div>
   </div>
 </section>
 
 <style>
   .principles {
-    padding: 160px 0;
+    padding: 192px 0;
     border-top: 1px solid var(--color-border);
     border-bottom: 1px solid var(--color-border);
   }
 
-  .lede {
-    margin-bottom: 96px;
-    max-width: 880px;
+  /* Head — занимает почти всю ширину хедера, как монументальный анонс */
+  .head {
+    margin-bottom: 128px;
   }
 
-  .lede h2 {
-    font-size: clamp(28px, 3vw, 44px);
+  .head .eyebrow {
+    margin-bottom: 32px;
+  }
+
+  .head h2 {
+    font-size: clamp(32px, 4vw, 60px);
     font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+    max-width: 1100px;
   }
 
-  .lede p {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--color-text-muted);
-    max-width: 56ch;
-    margin-top: 24px;
-  }
-
-  .list {
-    list-style: none;
-  }
-
-  .item {
-    display: block;
-    padding: 48px 0;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .item:last-child {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .title {
-    font-size: clamp(22px, 2.2vw, 28px);
-    font-weight: 500;
-    letter-spacing: -0.015em;
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-
-  .text {
-    font-size: 17px;
+  .head .lead {
+    font-size: 19px;
     line-height: 1.55;
     color: var(--color-text-muted);
-    max-width: 60ch;
+    margin-top: 40px;
+    max-width: 56ch;
+  }
+
+  /* Manifesto — узкая editorial-колонка 680px, смещена вправо
+     для editorial-асимметрии "тезис слева ↔ аргументация справа" */
+  .manifesto {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .paragraph {
+    font-size: 18px;
+    line-height: 1.65;
+    margin-bottom: 56px;
+    color: var(--color-text);
+  }
+
+  .paragraph:last-child {
+    margin-bottom: 0;
+  }
+
+  .paragraph strong {
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  @media (max-width: 1024px) {
+    .manifesto {
+      margin-left: 0;
+    }
   }
 
   @media (max-width: 720px) {
     .principles {
-      padding: 80px 0;
+      padding: 96px 0;
     }
-    .lede {
-      margin-bottom: 56px;
+    .head {
+      margin-bottom: 64px;
     }
-    .item {
-      padding: 32px 0;
+    .head h2 {
+      font-size: 30px;
     }
-    .title {
-      font-size: 20px;
+    .head .lead {
+      font-size: 17px;
+      margin-top: 28px;
+    }
+    .paragraph {
+      font-size: 17px;
+      margin-bottom: 36px;
     }
   }
 </style>
