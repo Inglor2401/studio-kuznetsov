@@ -13,12 +13,22 @@ import { SITE } from '../data/site';
       </p>
     </header>
 
+    {/* Editorial index — слева тематический лейбл крупным mono,
+        справа разворачивание принципа. Левая колонка работает как
+        визуальное оглавление манифеста, не как пустота. */}
     <div class="manifesto">
       {
         SITE.antiList.map((p) => (
-          <p class="paragraph">
-            <strong>{p.title}.</strong> {p.text}
-          </p>
+          <article class="row">
+            <div class="label-col">
+              <span class="label mono">{p.label}</span>
+            </div>
+            <div class="text-col">
+              <p class="paragraph">
+                <strong>{p.title}.</strong> {p.text}
+              </p>
+            </div>
+          </article>
         ))
       }
     </div>
@@ -58,23 +68,40 @@ import { SITE } from '../data/site';
     max-width: 56ch;
   }
 
-  /* Manifesto — узкая editorial-колонка 680px, смещена вправо
-     для editorial-асимметрии "тезис слева ↔ аргументация справа" */
+  /* Manifesto — двухколоночный editorial index.
+     Каждый принцип = одна строка grid: лейбл слева, тело справа. */
   .manifesto {
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: 0;
+    display: grid;
+    gap: 72px;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: minmax(140px, 200px) minmax(0, 680px);
+    gap: 96px;
+    align-items: start;
+  }
+
+  .label-col {
+    /* Лейбл выровнен по верхней линии текста справа.
+       padding-top компенсирует разницу cap-height между mono и body. */
+    padding-top: 6px;
+  }
+
+  .label {
+    font-size: clamp(20px, 1.8vw, 28px);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--color-text);
+    display: inline-block;
   }
 
   .paragraph {
     font-size: 18px;
     line-height: 1.65;
-    margin-bottom: 56px;
+    margin: 0;
     color: var(--color-text);
-  }
-
-  .paragraph:last-child {
-    margin-bottom: 0;
   }
 
   .paragraph strong {
@@ -82,12 +109,15 @@ import { SITE } from '../data/site';
     letter-spacing: -0.005em;
   }
 
+  /* Tablet — сужаем gap, лейбл-колонку */
   @media (max-width: 1024px) {
-    .manifesto {
-      margin-left: 0;
+    .row {
+      grid-template-columns: minmax(120px, 160px) 1fr;
+      gap: 56px;
     }
   }
 
+  /* Mobile — стек: лейбл сверху, текст под ним */
   @media (max-width: 720px) {
     .principles {
       padding: 96px 0;
@@ -102,9 +132,21 @@ import { SITE } from '../data/site';
       font-size: 17px;
       margin-top: 28px;
     }
+    .manifesto {
+      gap: 48px;
+    }
+    .row {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .label-col {
+      padding-top: 0;
+    }
+    .label {
+      font-size: 18px;
+    }
     .paragraph {
       font-size: 17px;
-      margin-bottom: 36px;
     }
   }
 </style>

@@ -18,6 +18,9 @@ export function url(path: string | undefined | null): string {
   if (path.startsWith('#') || path.startsWith('mailto:') || path.startsWith('tel:')) {
     return path;
   }
+  // Root link "/" → возвращаем BASE без trailing slash (соответствует trailingSlash: 'never').
+  // На GitHub Pages работает в обе стороны, но dev-сервер строго трактует слеш и отдаёт 404.
+  if (path === '/') return BASE || '/';
   if (!path.startsWith('/')) path = '/' + path;
   return BASE + path;
 }

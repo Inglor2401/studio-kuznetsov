@@ -80,26 +80,45 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
     </section>
 
     <script>
-      // Scroll-morph: floor plan fades out, cover photo fades in.
-      // Прогрессивное усиление — без JS видна только cover photo (default opacity для plan = 0 в no-JS state).
+      // Scroll-morph: floor plan over a faintly-visible photo, photo emerges on scroll.
+      // Стартовое состояние: фото проступает на 10% как «бумажный фон», схема — главный слой.
+      // Морф завершается к 55% высоты hero — быстрее, чем раньше (было 90%).
       const heroes = document.querySelectorAll<HTMLElement>('[data-hero]');
+      const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       heroes.forEach((hero) => {
         const plan = hero.querySelector<HTMLElement>('[data-plan]');
         const photo = hero.querySelector<HTMLElement>('[data-photo]');
         if (!plan || !photo) return;
+        if (prefersReduce) return; // CSS уже сделает фото видимым, схему скроет
 
-        // Initial state: plan visible, photo invisible
+        const photoImg = photo.querySelector<HTMLImageElement>('img');
+
+        // Initial state: схема в полную, фото уже заметно проступает + чуть desaturated
         plan.style.opacity = '1';
-        photo.style.opacity = '0';
+        photo.style.opacity = '0.20';
+        if (photoImg) photoImg.style.filter = 'grayscale(0.4) brightness(1.05)';
 
         let ticking = false;
         const update = () => {
           const rect = hero.getBoundingClientRect();
           const heroH = hero.offsetHeight;
-          // progress 0 (hero at top) → 1 (hero scrolled out by 90%)
-          const p = Math.max(0, Math.min(1, -rect.top / (heroH * 0.9)));
-          plan.style.opacity = String(Math.max(0, 1 - p * 1.4));
-          photo.style.opacity = String(Math.min(1, p * 1.4));
+          const scrolled = Math.max(0, -rect.top);
+          // Раздельные кривые:
+          //   photo — завершается на 25% высоты hero (быстрое проявление, как просил)
+          //   plan  — уходит плавно до 55% (без резкости, работает как калька)
+          // В переходный момент схема становится полупрозрачным наложением
+          // поверх уже видимого фото — эффект архитектурной кальки.
+          const photoP = Math.min(1, scrolled / (heroH * 0.25));
+          const planP = Math.min(1, scrolled / (heroH * 0.55));
+          const photoEased = 1 - (1 - photoP) * (1 - photoP);
+          plan.style.opacity = String(1 - planP);
+          photo.style.opacity = String(0.20 + 0.80 * photoEased);
+          if (photoImg) {
+            const gs = (0.4 * (1 - photoEased)).toFixed(3);
+            const br = (1.05 - 0.05 * photoEased).toFixed(3);
+            photoImg.style.filter = `grayscale(${gs}) brightness(${br})`;
+          }
           ticking = false;
         };
 
@@ -300,6 +319,9 @@ const prev = SITE.projects[(idx - 1 + SITE.projects.length) % SITE.projects.leng
     }
     .hero-photo {
       opacity: 1 !important;
+    }
+    .hero-photo img {
+      filter: none !important;
     }
   }
 
