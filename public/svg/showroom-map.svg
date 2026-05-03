@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" role="img" aria-label="Карта района Патриаршие пруды с указанием шоурума STUDIO KUZNETSOV">
+  <title>Шоурум STUDIO KUZNETSOV — Патриаршие пруды, Москва</title>
+
+  <!-- Парк / водоём — Патриарший пруд -->
+  <g id="pond" fill="none" stroke="#1A1A1A" stroke-width="0.5" opacity="0.45">
+    <ellipse cx="300" cy="240" rx="62" ry="44" />
+    <ellipse cx="300" cy="240" rx="58" ry="40" stroke-dasharray="2 4" />
+  </g>
+
+  <!-- Сетка кварталов / улицы — основные оси -->
+  <g id="streets" fill="none" stroke="#1A1A1A" stroke-width="0.6" opacity="0.55">
+    <!-- Малая Бронная -->
+    <line x1="0"   y1="180" x2="600" y2="180" />
+    <!-- Большая Бронная -->
+    <line x1="0"   y1="320" x2="600" y2="320" />
+    <!-- Спиридоньевский -->
+    <line x1="0"   y1="100" x2="600" y2="100" />
+    <!-- Ермолаевский -->
+    <line x1="0"   y1="380" x2="600" y2="380" />
+    <!-- Вертикали -->
+    <line x1="180" y1="0"   x2="180" y2="480" />
+    <line x1="380" y1="0"   x2="380" y2="480" />
+    <line x1="80"  y1="0"   x2="80"  y2="480" />
+    <line x1="500" y1="0"   x2="500" y2="480" />
+  </g>
+
+  <!-- Дополнительные мелкие переулки -->
+  <g id="lanes" fill="none" stroke="#1A1A1A" stroke-width="0.4" opacity="0.30">
+    <line x1="0"   y1="60"  x2="600" y2="60" />
+    <line x1="0"   y1="420" x2="600" y2="420" />
+    <line x1="240" y1="0"   x2="240" y2="480" />
+    <line x1="320" y1="0"   x2="320" y2="480" />
+    <line x1="440" y1="0"   x2="440" y2="480" />
+    <line x1="120" y1="0"   x2="120" y2="480" />
+  </g>
+
+  <!-- Маркер шоурума — крестовидная марка с кружком -->
+  <g id="marker" transform="translate(380, 180)">
+    <!-- Перекрестие на положении -->
+    <line x1="-14" y1="0" x2="14"  y2="0" stroke="#1A1A1A" stroke-width="1.4" />
+    <line x1="0"   y1="-14" x2="0"  y2="14" stroke="#1A1A1A" stroke-width="1.4" />
+    <!-- Точка в центре -->
+    <circle cx="0" cy="0" r="3.5" fill="#1A1A1A" />
+    <!-- Внешнее кольцо -->
+    <circle cx="0" cy="0" r="11" fill="none" stroke="#1A1A1A" stroke-width="0.8" />
+  </g>
+
+  <!-- Подпись шоурума — справа от маркера -->
+  <g id="label" font-family="'Geist Mono', ui-monospace, monospace" font-size="11" letter-spacing="0.04em" fill="#1A1A1A">
+    <text x="402" y="166" font-weight="500">STUDIO KUZNETSOV</text>
+    <text x="402" y="180" opacity="0.6">шоурум, по записи</text>
+  </g>
+
+  <!-- Подпись пруда -->
+  <g id="pond-label" font-family="'Geist Mono', ui-monospace, monospace" font-size="9" letter-spacing="0.06em" fill="#1A1A1A" opacity="0.55">
+    <text x="300" y="244" text-anchor="middle">ПАТРИАРШИЕ</text>
+    <text x="300" y="256" text-anchor="middle">ПРУДЫ</text>
+  </g>
+
+  <!-- Компас — N в верхнем правом углу -->
+  <g id="compass" transform="translate(560, 40)" font-family="'Geist Mono', ui-monospace, monospace" font-size="9" fill="#1A1A1A">
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#1A1A1A" stroke-width="0.6" />
+    <text x="0" y="-16" text-anchor="middle" letter-spacing="0.08em">N</text>
+  </g>
+
+  <!-- Масштаб — внизу справа -->
+  <g id="scale" transform="translate(500, 450)" font-family="'Geist Mono', ui-monospace, monospace" font-size="8" fill="#1A1A1A" opacity="0.55">
+    <line x1="0" y1="0" x2="60" y2="0" stroke="#1A1A1A" stroke-width="0.6" />
+    <line x1="0" y1="-3" x2="0" y2="3" stroke="#1A1A1A" stroke-width="0.6" />
+    <line x1="60" y1="-3" x2="60" y2="3" stroke="#1A1A1A" stroke-width="0.6" />
+    <text x="30" y="14" text-anchor="middle" letter-spacing="0.08em">200 м</text>
+  </g>
+</svg>
