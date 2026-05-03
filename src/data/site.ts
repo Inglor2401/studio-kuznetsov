@@ -84,10 +84,9 @@ export const SITE = {
     phoneLabel: '+7 495 000 00 00',
   },
 
-  // Materials временно скрыт из nav — пока не сгенерены 10 close-up фото.
-  // Страница доступна по прямому URL /materials, в коде остаётся.
   navigation: [
     { href: '/projects', label: 'Объекты' },
+    { href: '/materials', label: 'Материалы' },
     { href: '/studio', label: 'Студия' },
     { href: '/contact', label: 'Связаться' },
   ] as NavItem[],

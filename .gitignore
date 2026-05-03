@@ -6,3 +6,7 @@ dist/
 .DS_Store
 *.log
 lh-*.json
+
+# Image staging — исходные PNG, обрабатываются в AVIF в /public/images/{materials,projects,studio}/
+public/images/_staging/
+public/images/_staging-materials/
